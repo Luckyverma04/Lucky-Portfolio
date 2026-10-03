@@ -21,10 +21,11 @@ import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 
-// Company logo (Experience section)
+// Company logos
 import trazoo from "./company/trazoo.png";
+import phyllo from "./company/phyllo.svg";
 
-// Project screenshots (Work section)
+// Project screenshots
 import trazooProject from "./trazoo.png";
 import staynearev from "./staynearev.png";
 import mergx from "./mergx.png";
@@ -53,6 +54,7 @@ export {
   typescript,
   threejs,
   trazoo,
+  phyllo,
   trazooProject,
   staynearev,
   mergx,

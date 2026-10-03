@@ -12,6 +12,7 @@ import {
   mongodb,
   git,
   trazoo,
+  phyllo,
   trazooProject,
   staynearev,
   mergx,
@@ -89,6 +90,19 @@ const technologies = [
 
 const experiences = [
   {
+    title: "Business Operations Intern",
+    company_name: "Phyllo",
+    icon: phyllo,
+    iconBg: "#ffffff",
+    date: "September 2026 - Present",
+    points: [
+      "Conducted professional profile research across LinkedIn and other social platforms, matching profiles using name, company, job title, and location.",
+      "Supported background verification (BGV) research using predefined verification workflows and structured data.",
+      "Validated profile data to distinguish reliable matches from unresolved cases and documented profiles that could not be reliably matched.",
+      "Maintained Excel / Google Sheets records and coordinated task progress with the team through Slack.",
+    ],
+  },
+  {
     title: "Web Developer Intern",
     company_name: "Trazoo Global LLP",
     icon: trazoo,
@@ -132,8 +146,10 @@ const projects = [
       },
     ],
     image: trazooProject,
-    source_code_link: "https://github.com/Luckyverma04/TrazooProductsFrontend",
-    backend_code_link: "https://github.com/Luckyverma04/Trazoo-products-backend",
+    source_code_link:
+      "https://github.com/Luckyverma04/TrazooProductsFrontend",
+    backend_code_link:
+      "https://github.com/Luckyverma04/Trazoo-products-backend",
     live_site_link: "https://www.trazooglobal.com",
   },
   {
@@ -163,7 +179,8 @@ const projects = [
       },
     ],
     image: staynearev,
-    source_code_link: "https://github.com/Luckyverma04/StayNearEvFrontend",
+    source_code_link:
+      "https://github.com/Luckyverma04/StayNearEvFrontend",
     backend_code_link: "https://github.com/Luckyverma04/StayNearEv",
     live_site_link: "https://staynearevfrontend.onrender.com",
   },
