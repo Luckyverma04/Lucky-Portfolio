@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -6,7 +5,7 @@ import web from "./web.png";
 import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
-
+import logo from "./logo.svg";
 import css from "./tech/css.png";
 import docker from "./tech/docker.png";
 import figma from "./tech/figma.png";
@@ -25,14 +24,13 @@ import threejs from "./tech/threejs.svg";
 import trazoo from "./company/trazoo.png";
 import phyllo from "./company/phyllo.svg";
 
-// Project screenshots
-import trazooProject from "./trazoo.png";
-import staynearev from "./staynearev.png";
-import mergx from "./mergx.png";
-import reactprojects from "./reactprojects.png";
+// Project screenshots - optimized WebP images
+import trazooProject from "./trazoo.webp";
+import staynearev from "./staynearev.webp";
+import mergx from "./mergx.webp";
+import reactprojects from "./reactprojects.webp";
 
 export {
-  logo,
   backend,
   creator,
   mobile,
@@ -51,6 +49,7 @@ export {
   reactjs,
   redux,
   tailwind,
+  logo,
   typescript,
   threejs,
   trazoo,
