@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -12,12 +13,8 @@ import { SectionWrapper } from "../hoc";
 import { technologies } from "../constants";
 import { textVariant } from "../utils/motion";
 
-// Lazy load the heavy 3D Ball component
-const BallCanvas = lazy(() =>
-  import("./canvas").then((module) => ({
-    default: module.BallCanvas,
-  }))
-);
+// Load only the Ball component that Tech section needs
+const BallCanvas = lazy(() => import("./canvas/Ball"));
 
 const Tech = () => {
   const sectionRef = useRef(null);
@@ -28,7 +25,6 @@ const Tech = () => {
 
     if (!section) return;
 
-    // Start loading shortly before the section enters the viewport
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

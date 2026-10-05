@@ -4,18 +4,18 @@ import { BrowserRouter } from "react-router-dom";
 import {
   About,
   Contact,
-  Experience,
   Hero,
   Navbar,
   Tech,
-  Works,
 } from "./components";
 
-// Load the heavy star background only when needed
+// Lazy load heavier sections
+const Experience = lazy(() => import("./components/Experience"));
+
+const Works = lazy(() => import("./components/Works"));
+
 const StarsCanvas = lazy(() =>
-  import("./components/canvas").then((module) => ({
-    default: module.StarsCanvas,
-  }))
+  import("./components/canvas/Stars")
 );
 
 const App = () => {
@@ -28,11 +28,21 @@ const App = () => {
           <Hero />
         </div>
 
-        {/* Main sections */}
+        {/* About */}
         <About />
-        <Experience />
+
+        {/* Experience */}
+        <Suspense fallback={null}>
+          <Experience />
+        </Suspense>
+
+        {/* Tech Stack */}
         <Tech />
-        <Works />
+
+        {/* Projects */}
+        <Suspense fallback={null}>
+          <Works />
+        </Suspense>
 
         {/* Contact + Stars */}
         <div className="relative z-0">

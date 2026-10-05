@@ -3,27 +3,45 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 
-// Load the 3D computer only after the main page becomes idle
+// Load only the Computer 3D component
 const ComputersCanvas = lazy(() =>
-  import("./canvas").then((module) => ({
-    default: module.ComputersCanvas,
-  }))
+  import("./canvas/Computers")
 );
 
 const Hero = () => {
   const [showComputer, setShowComputer] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    let timer;
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+
+    const updateDevice = () => {
+      setIsMobile(mobileQuery.matches);
+    };
+
+    updateDevice();
+
+    mobileQuery.addEventListener("change", updateDevice);
+
+    return () => {
+      mobileQuery.removeEventListener("change", updateDevice);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Do not load heavy 3D computer on mobile
+    if (isMobile) {
+      setShowComputer(false);
+      return;
+    }
 
     const load3D = () => {
       setShowComputer(true);
     };
 
-    // Don't load Three.js during the critical initial page render.
     if ("requestIdleCallback" in window) {
       const idleId = window.requestIdleCallback(load3D, {
-        timeout: 2500,
+        timeout: 4000,
       });
 
       return () => {
@@ -31,28 +49,31 @@ const Hero = () => {
       };
     }
 
-    // Fallback for browsers without requestIdleCallback
-    timer = setTimeout(load3D, 1500);
+    const timer = setTimeout(load3D, 3000);
 
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <section className="relative w-full h-screen mx-auto overflow-hidden">
-      {/* ---------- LEFT: text ---------- */}
+      {/* ---------- LEFT: TEXT ---------- */}
       <div
         className={`absolute inset-0 top-[120px] z-10 pointer-events-none max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
       >
         <div className="flex flex-col justify-center items-center mt-5">
           <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
+
           <div className="w-1 sm:h-80 h-40 violet-gradient" />
         </div>
 
         <div className="md:max-w-[52%] w-full">
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className="text-[#915EFF]">Lucky Verma</span>
+            Hi, I'm{" "}
+            <span className="text-[#915EFF]">
+              Lucky Verma
+            </span>
           </h1>
 
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
@@ -63,23 +84,51 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* ---------- RIGHT: 3D computer ---------- */}
-      <div className="absolute inset-0 md:left-[52%] md:top-0 left-0 top-[45%]">
-        {showComputer && (
-          <Suspense fallback={null}>
-            <ComputersCanvas />
-          </Suspense>
-        )}
-      </div>
+      {/* ---------- DESKTOP 3D COMPUTER ---------- */}
+      {!isMobile && (
+        <div className="absolute inset-0 md:left-[52%] md:top-0 left-0 top-[45%]">
+          {showComputer && (
+            <Suspense fallback={null}>
+              <ComputersCanvas />
+            </Suspense>
+          )}
+        </div>
+      )}
 
-      {/* ---------- scroll indicator ---------- */}
+      {/* ---------- MOBILE VISUAL ---------- */}
+      {isMobile && (
+        <div className="absolute left-0 right-0 bottom-[8%] flex justify-center pointer-events-none">
+          <div className="relative w-[280px] h-[180px]">
+            <div className="absolute inset-0 rounded-3xl bg-[#100d25]/80 blur-xl" />
+
+            <div className="relative w-full h-full rounded-2xl border border-[#915EFF]/30 bg-[#100d25]/70 flex items-center justify-center">
+              <div className="text-center">
+                <div className="text-[#915EFF] text-5xl font-bold">
+                  {"</>"}
+                </div>
+
+                <p className="mt-3 text-white text-sm font-medium">
+                  Full Stack Developer
+                </p>
+
+                <p className="mt-1 text-secondary text-xs">
+                  React • Node • MongoDB
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ---------- SCROLL INDICATOR ---------- */}
       <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center p-2 z-10">
-        <a href="#about">
+        <a
+          href="#about"
+          aria-label="Scroll to About section"
+        >
           <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
             <motion.div
-              animate={{
-                y: [0, 24, 0],
-              }}
+              animate={{ y: [0, 24, 0] }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,12 +19,14 @@
   display: block;
 }
 
+/* Black gradient */
 .black-gradient {
   background: #000000;
   background: -webkit-linear-gradient(to right, #434343, #000000);
   background: linear-gradient(to right, #434343, #000000);
 }
 
+/* Violet gradient */
 .violet-gradient {
   background: #804dee;
   background: linear-gradient(
@@ -30,6 +34,7 @@
     #804dee 0%,
     rgba(60, 51, 80, 0) 100%
   );
+
   background: -webkit-linear-gradient(
     -90deg,
     #804dee 0%,
@@ -37,6 +42,7 @@
   );
 }
 
+/* Green pink gradient */
 .green-pink-gradient {
   background: #00cea8;
   background: linear-gradient(
@@ -44,6 +50,7 @@
     #00cea8 1.9%,
     #bf61ff 97.5%
   );
+
   background: -webkit-linear-gradient(
     -90.13deg,
     #00cea8 1.9%,
@@ -51,6 +58,7 @@
   );
 }
 
+/* Orange text gradient */
 .orange-text-gradient {
   background: #f12711;
   background: -webkit-linear-gradient(
@@ -58,15 +66,18 @@
     #f12711,
     #f5af19
   );
+
   background: linear-gradient(
     to top,
     #f12711,
     #f5af19
   );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Green text gradient */
 .green-text-gradient {
   background: #11998e;
   background: -webkit-linear-gradient(
@@ -74,15 +85,18 @@
     #11998e,
     #38ef7d
   );
+
   background: linear-gradient(
     to top,
     #11998e,
     #38ef7d
   );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Blue text gradient */
 .blue-text-gradient {
   background: #56ccf2;
   background: -webkit-linear-gradient(
@@ -90,15 +104,18 @@
     #2f80ed,
     #56ccf2
   );
+
   background: linear-gradient(
     to top,
     #2f80ed,
     #56ccf2
   );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Pink text gradient */
 .pink-text-gradient {
   background: #ec008c;
   background: -webkit-linear-gradient(
@@ -106,11 +123,13 @@
     #ec008c,
     #fc6767
   );
+
   background: linear-gradient(
     to top,
     #ec008c,
     #fc6767
   );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
