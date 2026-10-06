@@ -1,11 +1,13 @@
-import backend from "./backend.png";
+import backend from "./backend.webp";
 import creator from "./creator.png";
-import mobile from "./mobile.png";
-import web from "./web.png";
+import mobile from "./mobile.webp";
+import web from "./web.webp";
+
 import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import logo from "./logo.svg";
+
 import css from "./tech/css.png";
 import docker from "./tech/docker.png";
 import figma from "./tech/figma.png";
@@ -38,6 +40,7 @@ export {
   github,
   menu,
   close,
+  logo,
   css,
   docker,
   figma,
@@ -49,7 +52,6 @@ export {
   reactjs,
   redux,
   tailwind,
-  logo,
   typescript,
   threejs,
   trazoo,
