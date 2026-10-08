@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { technologies } from "../constants";
-import { textVariant } from "../utils/motion";
 
 const Tech = () => {
   const sectionRef = useRef(null);
@@ -23,23 +21,21 @@ const Tech = () => {
         }
       },
       {
-        rootMargin: "200px",
+        rootMargin: "200px 0px",
         threshold: 0.01,
       }
     );
 
     observer.observe(section);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <div ref={sectionRef}>
-      <motion.div
-        variants={textVariant()}
-        initial="hidden"
-        animate={isVisible ? "show" : "hidden"}
-      >
+      <div>
         <p className={styles.sectionSubText}>
           What I work with
         </p>
@@ -47,7 +43,7 @@ const Tech = () => {
         <h2 className={styles.sectionHeadText}>
           Tech Stack.
         </h2>
-      </motion.div>
+      </div>
 
       <div className="mt-14 flex flex-row flex-wrap justify-center gap-8 sm:gap-10">
         {technologies.map((technology) => (
@@ -60,8 +56,8 @@ const Tech = () => {
                 src={technology.icon}
                 alt={`${technology.name} technology`}
                 title={technology.name}
-                width="112"
-                height="112"
+                width={112}
+                height={112}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-contain"
