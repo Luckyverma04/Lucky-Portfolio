@@ -1,8 +1,4 @@
-import React, {
-  lazy,
-  Suspense,
-  useState,
-} from "react";
+import React, { useState } from "react";
 
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
@@ -10,11 +6,6 @@ import emailjs from "@emailjs/browser";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
-
-// Load only Earth when Contact section needs it
-const EarthCanvas = lazy(() =>
-  import("./canvas/Earth")
-);
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -37,14 +28,9 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const serviceId =
-      import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
-
-    const templateId =
-      import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID;
-
-    const publicKey =
-      import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
+    const serviceId = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
       alert(
@@ -99,7 +85,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden">
+    <div className="xl:mt-12 flex xl:flex-row flex-col gap-10 overflow-hidden">
       {/* Contact Form */}
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
@@ -213,14 +199,44 @@ const Contact = () => {
         </div>
       </motion.div>
 
-      {/* 3D Earth */}
+      {/* Lightweight Developer Card */}
       <motion.div
         variants={slideIn("right", "tween", 0.2, 1)}
-        className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
+        className="xl:flex-1 flex items-center justify-center min-h-[350px] md:min-h-[550px]"
       >
-        <Suspense fallback={null}>
-          <EarthCanvas />
-        </Suspense>
+        <div className="relative w-full max-w-[420px] h-[350px] flex items-center justify-center">
+          {/* Glow */}
+          <div className="absolute w-64 h-64 rounded-full bg-[#915EFF]/20 blur-3xl" />
+
+          {/* Card */}
+          <div className="relative w-full h-full max-w-[380px] rounded-3xl border border-[#915EFF]/30 bg-[#100d25]/80 backdrop-blur-sm flex flex-col items-center justify-center shadow-2xl">
+            <div className="text-[#915EFF] text-7xl font-bold">
+              {"</>"}
+            </div>
+
+            <h4 className="mt-6 text-white text-2xl font-bold text-center">
+              Full Stack Developer
+            </h4>
+
+            <p className="mt-3 text-secondary text-center text-sm">
+              React • Node.js • Express • MongoDB
+            </p>
+
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-[#915EFF]/10 border border-[#915EFF]/20 text-[#dfd9ff] text-xs">
+                MERN
+              </span>
+
+              <span className="px-3 py-1 rounded-full bg-[#915EFF]/10 border border-[#915EFF]/20 text-[#dfd9ff] text-xs">
+                REST APIs
+              </span>
+
+              <span className="px-3 py-1 rounded-full bg-[#915EFF]/10 border border-[#915EFF]/20 text-[#dfd9ff] text-xs">
+                JavaScript
+              </span>
+            </div>
+          </div>
+        </div>
       </motion.div>
     </div>
   );
