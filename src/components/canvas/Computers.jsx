@@ -16,11 +16,10 @@ const Computers = ({ isMobile }) => {
         angle={0.12}
         penumbra={1}
         intensity={1}
-        castShadow
-        shadow-mapSize={1024}
+        castShadow={false}
       />
 
-      <pointLight intensity={1} />
+      <pointLight intensity={0.8} />
 
       <primitive
         object={computer.scene}
@@ -38,26 +37,36 @@ const ComputersCanvas = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 500px)");
 
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
+    const updateDevice = () => {
+      setIsMobile(mediaQuery.matches);
     };
 
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    updateDevice();
+
+    mediaQuery.addEventListener("change", updateDevice);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange);
+      mediaQuery.removeEventListener("change", updateDevice);
     };
   }, []);
+
+  // Don't render the 3D computer on mobile.
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <Canvas
       frameloop="demand"
-      shadows
-      dpr={[1, 1.5]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
+      shadows={false}
+      dpr={1}
+      camera={{
+        position: [20, 3, 5],
+        fov: 25,
+      }}
       gl={{
+        antialias: false,
+        alpha: true,
         preserveDrawingBuffer: false,
         powerPreference: "high-performance",
       }}
@@ -65,11 +74,13 @@ const ComputersCanvas = () => {
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           enableZoom={false}
+          enablePan={false}
+          enableDamping={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
 
-        <Computers isMobile={isMobile} />
+        <Computers isMobile={false} />
       </Suspense>
     </Canvas>
   );

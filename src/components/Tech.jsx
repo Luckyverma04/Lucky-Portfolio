@@ -1,11 +1,4 @@
-import React, {
-  lazy,
-  Suspense,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -13,12 +6,9 @@ import { SectionWrapper } from "../hoc";
 import { technologies } from "../constants";
 import { textVariant } from "../utils/motion";
 
-// Load only the Ball component that Tech section needs
-const BallCanvas = lazy(() => import("./canvas/Ball"));
-
 const Tech = () => {
   const sectionRef = useRef(null);
-  const [shouldLoadTech, setShouldLoadTech] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -28,26 +18,28 @@ const Tech = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setShouldLoadTech(true);
+          setIsVisible(true);
           observer.disconnect();
         }
       },
       {
-        rootMargin: "400px 0px",
+        rootMargin: "200px",
         threshold: 0.01,
       }
     );
 
     observer.observe(section);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div ref={sectionRef}>
-      <motion.div variants={textVariant()}>
+      <motion.div
+        variants={textVariant()}
+        initial="hidden"
+        animate={isVisible ? "show" : "hidden"}
+      >
         <p className={styles.sectionSubText}>
           What I work with
         </p>
@@ -57,24 +49,23 @@ const Tech = () => {
         </h2>
       </motion.div>
 
-      <div className="mt-14 flex flex-row flex-wrap justify-center gap-10">
+      <div className="mt-14 flex flex-row flex-wrap justify-center gap-8 sm:gap-10">
         {technologies.map((technology) => (
           <div
-            className="w-28 h-28"
             key={technology.name}
+            className="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center"
           >
-            {shouldLoadTech ? (
-              <Suspense
-                fallback={
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="canvas-loader" />
-                  </div>
-                }
-              >
-                <BallCanvas icon={technology.icon} />
-              </Suspense>
-            ) : (
-              <div className="w-full h-full" />
+            {isVisible && (
+              <img
+                src={technology.icon}
+                alt={`${technology.name} technology`}
+                title={technology.name}
+                width="112"
+                height="112"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-contain"
+              />
             )}
           </div>
         ))}

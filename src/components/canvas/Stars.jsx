@@ -1,25 +1,45 @@
-import { useState, useRef, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Preload } from "@react-three/drei";
+import { useEffect, useRef } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Points, PointMaterial } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 
-const Stars = (props) => {
-  const ref = useRef();
-  const [sphere] = useState(() => random.inSphere(new Float32Array(5000), { radius: 1.2 }));
+const Stars = () => {
+  const groupRef = useRef();
+  const { invalidate } = useThree();
 
-  useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
-  });
+  // Reduced number of stars
+  const sphere = random.inSphere(
+    new Float32Array(3000),
+    { radius: 1.2 }
+  );
+
+  // Instead of rendering 60+ frames every second,
+  // update the stars only ~12 times per second.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (groupRef.current) {
+        groupRef.current.rotation.x -= 0.002;
+        groupRef.current.rotation.y -= 0.0015;
+
+        invalidate();
+      }
+    }, 80);
+
+    return () => clearInterval(interval);
+  }, [invalidate]);
 
   return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
+    <group ref={groupRef} rotation={[0, 0, Math.PI / 4]}>
+      <Points
+        positions={sphere}
+        stride={3}
+        frustumCulled
+      >
         <PointMaterial
           transparent
-          color='#f272c8'
+          color="#f272c8"
           size={0.002}
-          sizeAttenuation={true}
+          sizeAttenuation
           depthWrite={false}
         />
       </Points>
@@ -29,13 +49,19 @@ const Stars = (props) => {
 
 const StarsCanvas = () => {
   return (
-    <div className='w-full h-auto absolute inset-0 z-[-1]'>
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <Suspense fallback={null}>
-          <Stars />
-        </Suspense>
-
-        <Preload all />
+    <div className="pointer-events-none absolute inset-0 z-[-1] w-full h-full">
+      <Canvas
+        frameloop="demand"
+        dpr={1}
+        camera={{ position: [0, 0, 1] }}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+          preserveDrawingBuffer: false,
+        }}
+      >
+        <Stars />
       </Canvas>
     </div>
   );
