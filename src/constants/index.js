@@ -12,7 +12,6 @@ import {
   mongodb,
   git,
   trazoo,
-  phyllo,
   trazooProject,
   staynearev,
   mergx,
@@ -90,24 +89,11 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Business Operations Intern",
-    company_name: "Phyllo",
-    icon: phyllo,
-    iconBg: "#ffffff",
-    date: "September 2026 - Present",
-    points: [
-      "Conducted professional profile research across LinkedIn and other social platforms, matching profiles using name, company, job title, and location.",
-      "Supported background verification (BGV) research using predefined verification workflows and structured data.",
-      "Validated profile data to distinguish reliable matches from unresolved cases and documented profiles that could not be reliably matched.",
-      "Maintained Excel / Google Sheets records and coordinated task progress with the team through Slack.",
-    ],
-  },
-  {
-    title: "Web Developer Intern",
+    title: "Web Developer",
     company_name: "Trazoo Global LLP",
     icon: trazoo,
     iconBg: "#ffffff",
-    date: "January 2026 - May 2026",
+    date: "January 2026 - Present",
     points: [
       "Built and shipped production features for a B2B corporate gifting platform using React, Vite and Tailwind CSS on the frontend, with Node.js, Express and MongoDB powering the API.",
       "Redesigned the hero and product range sections with category grouping and a responsive two-column layout, making the catalogue easier to browse on mobile and desktop.",
@@ -152,6 +138,7 @@ const projects = [
       "https://github.com/Luckyverma04/Trazoo-products-backend",
     live_site_link: "https://www.trazooglobal.com",
   },
+
   {
     name: "StayNearEV",
     description:
@@ -181,9 +168,12 @@ const projects = [
     image: staynearev,
     source_code_link:
       "https://github.com/Luckyverma04/StayNearEvFrontend",
-    backend_code_link: "https://github.com/Luckyverma04/StayNearEv",
-    live_site_link: "https://staynearevfrontend.onrender.com",
+    backend_code_link:
+      "https://github.com/Luckyverma04/StayNearEv",
+    live_site_link:
+      "https://staynearevfrontend.onrender.com",
   },
+
   {
     name: "Mergx — PDF & Image Utility",
     description:
@@ -203,9 +193,12 @@ const projects = [
       },
     ],
     image: mergx,
-    source_code_link: "https://github.com/Luckyverma04/minor",
-    live_site_link: "https://imapdf.vercel.app",
+    source_code_link:
+      "https://github.com/Luckyverma04/minor",
+    live_site_link:
+      "https://imapdf.vercel.app",
   },
+
   {
     name: "React Projects Collection",
     description:
@@ -229,7 +222,8 @@ const projects = [
       },
     ],
     image: reactprojects,
-    source_code_link: "https://github.com/Luckyverma04/React",
+    source_code_link:
+      "https://github.com/Luckyverma04/React",
   },
 ];
 
