@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -87,10 +84,7 @@ const Contact = () => {
   return (
     <div className="xl:mt-12 flex xl:flex-row flex-col gap-10 overflow-hidden">
       {/* Contact Form */}
-      <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
-      >
+      <div className="flex-[0.75] bg-black-100 p-8 rounded-2xl">
         <p className={styles.sectionSubText}>
           Get in touch
         </p>
@@ -103,6 +97,7 @@ const Contact = () => {
           onSubmit={handleSubmit}
           className="mt-12 flex flex-col gap-8"
         >
+          {/* Name */}
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">
               Your Name
@@ -120,6 +115,7 @@ const Contact = () => {
             />
           </label>
 
+          {/* Email */}
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">
               Your Email
@@ -137,6 +133,7 @@ const Contact = () => {
             />
           </label>
 
+          {/* Message */}
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">
               Your Message
@@ -153,6 +150,7 @@ const Contact = () => {
             />
           </label>
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={loading}
@@ -197,13 +195,10 @@ const Contact = () => {
             </a>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Lightweight Developer Card */}
-      <motion.div
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className="xl:flex-1 flex items-center justify-center min-h-[350px] md:min-h-[550px]"
-      >
+      <div className="xl:flex-1 flex items-center justify-center min-h-[350px] md:min-h-[550px]">
         <div className="relative w-full max-w-[420px] h-[350px] flex items-center justify-center">
           {/* Glow */}
           <div className="absolute w-64 h-64 rounded-full bg-[#915EFF]/20 blur-3xl" />
@@ -237,7 +232,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
