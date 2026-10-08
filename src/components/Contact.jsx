@@ -82,9 +82,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="xl:mt-12 flex xl:flex-row flex-col gap-10 overflow-hidden">
+    <div className="mt-12 w-full">
       {/* Contact Form */}
-      <div className="flex-[0.75] bg-black-100 p-8 rounded-2xl">
+      <div className="w-full bg-black-100 p-8 rounded-2xl">
         <p className={styles.sectionSubText}>
           Get in touch
         </p>
@@ -194,17 +194,6 @@ const Contact = () => {
               LinkedIn
             </a>
           </div>
-        </div>
-      </div>
-
-      {/* Lightweight Developer Card */}
-      <div className="xl:flex-1 flex items-center justify-center min-h-[350px] md:min-h-[550px]">
-        <div className="relative w-full max-w-[420px] h-[350px] flex items-center justify-center">
-          {/* Glow */}
-          <div className="absolute w-64 h-64 rounded-full bg-[#915EFF]/20 blur-3xl" />
-
-          {/* Card */}
-         
         </div>
       </div>
     </div>

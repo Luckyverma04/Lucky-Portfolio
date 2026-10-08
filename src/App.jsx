@@ -1,22 +1,14 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import {
-  Hero,
-  Navbar,
-} from "./components";
+import { Hero, Navbar } from "./components";
 
-// Lazy-load below-the-fold sections
 const About = lazy(() => import("./components/About"));
 const Experience = lazy(() => import("./components/Experience"));
 const Tech = lazy(() => import("./components/Tech"));
 const Works = lazy(() => import("./components/Works"));
 const Contact = lazy(() => import("./components/Contact"));
 const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
-
-const SectionFallback = () => (
-  <div className="w-full min-h-[100px]" aria-hidden="true" />
-);
 
 const App = () => {
   return (
@@ -29,28 +21,28 @@ const App = () => {
         </div>
 
         {/* About */}
-        <Suspense fallback={<SectionFallback />}>
+        <Suspense fallback={null}>
           <About />
         </Suspense>
 
         {/* Experience */}
-        <Suspense fallback={<SectionFallback />}>
+        <Suspense fallback={null}>
           <Experience />
         </Suspense>
 
         {/* Tech Stack */}
-        <Suspense fallback={<SectionFallback />}>
+        <Suspense fallback={null}>
           <Tech />
         </Suspense>
 
         {/* Projects */}
-        <Suspense fallback={<SectionFallback />}>
+        <Suspense fallback={null}>
           <Works />
         </Suspense>
 
         {/* Contact + Stars */}
         <div className="relative z-0">
-          <Suspense fallback={<SectionFallback />}>
+          <Suspense fallback={null}>
             <Contact />
           </Suspense>
 
