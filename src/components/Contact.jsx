@@ -204,33 +204,7 @@ const Contact = () => {
           <div className="absolute w-64 h-64 rounded-full bg-[#915EFF]/20 blur-3xl" />
 
           {/* Card */}
-          <div className="relative w-full h-full max-w-[380px] rounded-3xl border border-[#915EFF]/30 bg-[#100d25]/80 backdrop-blur-sm flex flex-col items-center justify-center shadow-2xl">
-            <div className="text-[#915EFF] text-7xl font-bold">
-              {"</>"}
-            </div>
-
-            <h4 className="mt-6 text-white text-2xl font-bold text-center">
-              Full Stack Developer
-            </h4>
-
-            <p className="mt-3 text-secondary text-center text-sm">
-              React • Node.js • Express • MongoDB
-            </p>
-
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-[#915EFF]/10 border border-[#915EFF]/20 text-[#dfd9ff] text-xs">
-                MERN
-              </span>
-
-              <span className="px-3 py-1 rounded-full bg-[#915EFF]/10 border border-[#915EFF]/20 text-[#dfd9ff] text-xs">
-                REST APIs
-              </span>
-
-              <span className="px-3 py-1 rounded-full bg-[#915EFF]/10 border border-[#915EFF]/20 text-[#dfd9ff] text-xs">
-                JavaScript
-              </span>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>
