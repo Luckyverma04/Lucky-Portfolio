@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { Hero, Navbar } from "./components";
@@ -11,6 +11,17 @@ const Contact = lazy(() => import("./components/Contact"));
 const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
 
 const App = () => {
+  const [showStars, setShowStars] = useState(false);
+
+  useEffect(() => {
+    // Let the Hero render first.
+    const timer = setTimeout(() => {
+      setShowStars(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="relative z-0 bg-primary">
@@ -40,15 +51,18 @@ const App = () => {
           <Works />
         </Suspense>
 
-        {/* Contact + Stars */}
+        {/* Contact */}
         <div className="relative z-0">
           <Suspense fallback={null}>
             <Contact />
           </Suspense>
 
-          <Suspense fallback={null}>
-            <StarsCanvas />
-          </Suspense>
+          {/* Load Three.js Stars after initial page render */}
+          {showStars && (
+            <Suspense fallback={null}>
+              <StarsCanvas />
+            </Suspense>
+          )}
         </div>
       </div>
     </BrowserRouter>
