@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
@@ -14,10 +14,15 @@ const ProjectCard = ({
   description,
   tags,
   image,
+  images,
   source_code_link,
   backend_code_link,
   live_site_link,
 }) => {
+  // Use `images` (a list) when a project has several screenshots, otherwise just `image`.
+  const list = images && images.length ? images : [image];
+  const [active, setActive] = useState(0);
+
   return (
     <motion.div
       variants={fadeIn("up", "spring", index * 0.5, 0.75)}
@@ -36,8 +41,8 @@ const ProjectCard = ({
           style={{ backgroundColor: "#100d25" }}
         >
           <img
-            src={image}
-            alt={`${name} project screenshot`}
+            src={list[active]}
+            alt={`${name} project screenshot ${active + 1}`}
             loading="lazy"
             decoding="async"
             width="360"
@@ -67,6 +72,27 @@ const ProjectCard = ({
             </a>
           </div>
         </div>
+
+        {/* Extra screenshots: click one to show it in the main frame */}
+        {list.length > 1 && (
+          <div className="mt-3 flex gap-2">
+            {list.map((src, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`Show ${name} screenshot ${i + 1}`}
+                aria-pressed={i === active}
+                className={`h-[44px] w-[72px] overflow-hidden rounded-lg border-2 transition-opacity ${
+                  i === active ? "border-[#915EFF]" : "border-transparent opacity-60 hover:opacity-100"
+                }`}
+                style={{ backgroundColor: "#100d25" }}
+              >
+                <img src={src} alt="" loading="lazy" className="h-full w-full object-contain" />
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Project Details */}
         <div className="mt-5">
