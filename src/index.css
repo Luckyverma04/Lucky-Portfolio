@@ -94,3 +94,4 @@ body {
 .live-dot { animation: ping 2.4s infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 rgb(var(--brand) / .6); } 70% { box-shadow: 0 0 0 8px rgb(var(--brand) / 0); } 100% { box-shadow: 0 0 0 0 rgb(var(--brand) / 0); } }
 @media (prefers-reduced-motion: reduce) { .grad-move, .flow-line, .packet, .live-dot { animation: none !important; } .packet { display: none; } }
+
