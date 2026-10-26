@@ -1,72 +1,41 @@
-import React from "react";
-import { Tilt } from "react-tilt";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import Reveal from "./Reveal";
+import { Section } from "./Shared";
+import { about, education, profile } from "../data/content";
 
-import { styles } from "../styles";
-import { services } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
-
-const ServiceCard = ({ index, title, icon }) => (
-  <Tilt className='xs:w-[250px] w-full'>
-    <motion.div
-      variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
-      className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
-    >
-      <div
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
-      >
-        <img
-          src={icon}
-          alt='web-development'
-          className='w-16 h-16 object-contain'
-        />
-
-        <h3 className='text-white text-[20px] font-bold text-center'>
-          {title}
-        </h3>
-      </div>
-    </motion.div>
-  </Tilt>
-);
-
-const About = () => {
+export default function About() {
+  const [hasPhoto, setHasPhoto] = useState(true);
   return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
-      </motion.div>
-
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
-      >
-        I'm a full-stack developer with a B.Tech in Computer Science, working
-        mainly across the MERN stack — React, Vite and Tailwind on the front
-        end, Node.js, Express and MongoDB on the back. I have shipped two
-        production platforms end to end: a B2B corporate gifting site now
-        running on its own domain, and an EV charging station booking app.
-        <br />
-        <br />
-        I enjoy the parts that usually get skipped — authentication flows,
-        database migrations, deployment configuration, SEO — because that is
-        where projects actually break. I'm currently looking for a full-time
-        developer role and can start immediately.
-      </motion.p>
-
-      <div className='mt-20 flex flex-wrap gap-10'>
-        {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
-        ))}
+    <Section n="01" id="about" eyebrow="About" title="A bit about me">
+      <div className="grid gap-8 md:grid-cols-12">
+        <Reveal className={hasPhoto ? "md:col-span-5 lg:col-span-4" : "hidden"}>
+          <img
+            src={profile.photo}
+            alt={`Portrait of ${profile.name}`}
+            onError={() => setHasPhoto(false)}
+            className="aspect-[4/5] w-full max-w-sm rounded-2xl border border-line object-cover"
+          />
+        </Reveal>
+        <Reveal className={hasPhoto ? "md:col-span-7 lg:col-span-8" : "md:col-span-8"}>
+          <div className="space-y-5 text-[17px] leading-relaxed text-ink/90">{about.map((t) => <p key={t}>{t}</p>)}</div>
+          {hasPhoto && <div className="mt-8 max-w-md"><EduCard /></div>}
+        </Reveal>
+        {!hasPhoto && (
+          <Reveal className="md:col-span-4" delay={100}>
+            <EduCard />
+          </Reveal>
+        )}
       </div>
-    </>
+    </Section>
   );
-};
+}
 
-export default SectionWrapper(About, "about");
+function EduCard() {
+  return (
+    <div className="card space-y-5 p-6">
+      <div><p className="eyebrow">Education</p><h3 className="mt-2 font-semibold leading-snug">{education.degree}</h3><p className="mt-1 text-sm text-muted">{education.school}</p></div>
+      <hr className="border-line" />
+      <div><p className="eyebrow">Based in</p><p className="mt-2 text-sm text-muted">{profile.location}</p></div>
+    </div>
+  );
+}

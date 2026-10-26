@@ -1,72 +1,38 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
-import { Hero, Navbar } from "./components";
-
-const About = lazy(() => import("./components/About"));
-const Experience = lazy(() => import("./components/Experience"));
-const Tech = lazy(() => import("./components/Tech"));
-const Works = lazy(() => import("./components/Works"));
-const Contact = lazy(() => import("./components/Contact"));
-const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
-
-const App = () => {
-  const [showStars, setShowStars] = useState(false);
-
+export default function App() {
   useEffect(() => {
-    // Let the Hero render first.
-    const timer = setTimeout(() => {
-      setShowStars(true);
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    const onMove = (e) => {
+      const el = e.target.closest && e.target.closest(".spot");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    document.addEventListener("mousemove", onMove, { passive: true });
+    return () => document.removeEventListener("mousemove", onMove);
   }, []);
-
   return (
-    <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        {/* Hero */}
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Hero />
-        </div>
-
-        {/* About */}
-        <Suspense fallback={null}>
-          <About />
-        </Suspense>
-
-        {/* Experience */}
-        <Suspense fallback={null}>
-          <Experience />
-        </Suspense>
-
-        {/* Tech Stack */}
-        <Suspense fallback={null}>
-          <Tech />
-        </Suspense>
-
-        {/* Projects */}
-        <Suspense fallback={null}>
-          <Works />
-        </Suspense>
-
-        {/* Contact */}
-        <div className="relative z-0">
-          <Suspense fallback={null}>
-            <Contact />
-          </Suspense>
-
-          {/* Load Three.js Stars after initial page render */}
-          {showStars && (
-            <Suspense fallback={null}>
-              <StarsCanvas />
-            </Suspense>
-          )}
-        </div>
-      </div>
-    </BrowserRouter>
+    <>
+      <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2">Skip to content</a>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
-};
-
-export default App;
+}

@@ -1,32 +1,21 @@
 /** @type {import('tailwindcss').Config} */
+const c = (v) => `rgb(var(--${v}) / <alpha-value>)`;
 module.exports = {
-  content: ["./src/**/*.{js,jsx}"],
-  mode: "jit",
-
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#050816",
-        secondary: "#aaa6c3",
-        tertiary: "#151030",
-        "black-100": "#100d25",
-        "black-200": "#090325",
-        "white-100": "#f3f3f3",
+        bg: c("bg"), surface: c("surface"), raised: c("raised"),
+        ink: c("ink"), muted: c("muted"),
+        brand: c("brand"), "brand-soft": c("brand-soft"),
+        violet: c("violet"), "violet-soft": c("violet-soft"),
       },
-
-      boxShadow: {
-        card: "0px 35px 120px -15px #211e35",
-      },
-
-      screens: {
-        xs: "450px",
-      },
-
-      backgroundImage: {
-        "hero-pattern": "url('/src/assets/herobg.webp')",
+      borderColor: { line: "var(--line)" },
+      fontFamily: {
+        sans: ['"Geist Variable"', "system-ui", "sans-serif"],
+        mono: ['"Geist Mono Variable"', "ui-monospace", "monospace"],
       },
     },
   },
-
   plugins: [],
 };
