@@ -7,7 +7,7 @@ import logo from "../assets/trazoo-logo.png";
 
 export default function Experience() {
   return (
-    <Section n="03" id="experience" eyebrow="Work" title="Where I work">
+    <Section  id="experience" eyebrow="Work" title="Where I work">
       <Reveal>
         <article className="card p-6 md:p-10">
           <div className="grid gap-10 lg:grid-cols-12">

@@ -4,7 +4,7 @@ import { skills } from "../data/content";
 
 export default function Skills() {
   return (
-    <Section n="02" id="skills" eyebrow="Skills" title="Tools I use">
+    <Section  id="skills" eyebrow="Skills" title="Tools I use">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
         {skills.map((g, i) => (
           <Reveal key={g.group} delay={i * 60} className={i < 3 ? "lg:col-span-2" : "lg:col-span-3"}>

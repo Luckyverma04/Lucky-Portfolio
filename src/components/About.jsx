@@ -6,7 +6,7 @@ import { about, education, profile } from "../data/content";
 export default function About() {
   const [hasPhoto, setHasPhoto] = useState(true);
   return (
-    <Section n="01" id="about" eyebrow="About" title="A bit about me">
+    <Section id="about" eyebrow="About" title="A bit about me">
       <div className="grid gap-8 md:grid-cols-12">
         <Reveal className={hasPhoto ? "md:col-span-5 lg:col-span-4" : "hidden"}>
           <img

@@ -56,7 +56,7 @@ export default function Hero() {
           <Reveal>
             <p className="flex items-center gap-2.5 font-mono text-sm text-muted">
               <span className="live-dot h-2 w-2 rounded-full bg-brand" aria-hidden="true" />
-              Hi, I'm {profile.name}. {profile.location}.
+              Hi, I'm {profile.name}..
             </p>
           </Reveal>
           <Reveal delay={70}>

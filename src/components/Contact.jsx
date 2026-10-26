@@ -37,7 +37,7 @@ export default function Contact() {
   };
 
   return (
-    <Section n="05" id="contact" eyebrow="Contact" title="Say hello" intro="Have a question about my work, or something you'd like to talk through? Send me a note.">
+    <Section id="contact" eyebrow="Contact" title="Say hello" intro="Have a question about my work, or something you'd like to talk through? Send me a note.">
       <div className="grid gap-8 md:grid-cols-12">
         <Reveal className="md:col-span-5">
           <ul className="space-y-3">
