@@ -3,23 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --bg: 11 16 32; --surface: 17 24 39; --raised: 22 32 51;
-  --ink: 248 250 252; --muted: 168 179 199;
-  --brand: 59 130 246; --brand-soft: 125 177 255;
-  --violet: 139 92 246; --violet-soft: 180 156 251;
-  --line: rgba(148, 163, 184, 0.16);
-  --glow-a: rgba(59, 130, 246, 0.2); --glow-b: rgba(139, 92, 246, 0.2);
-  --nav-bg: rgba(11, 16, 32, 0.85);
+  /* Dark: near-black with a sage tint, cream text. Burgundy only as the accent band. */
+  --bg: 24 25 22; --surface: 35 36 32; --raised: 46 47 42;
+  --ink: 232 210 181; --muted: 165 167 155;
+  --brand: 232 210 181; --brand-soft: 232 210 181;
+  --violet: 165 167 155; --violet-soft: 190 192 182;
+  --line: rgba(165, 167, 155, 0.22);
+  --glow-a: transparent; --glow-b: transparent;
+  --nav-bg: rgba(24, 25, 22, 0.9);
+  --btn-ink: #1c1d1a;
+  --h1: 232 210 181; --hl: 165 167 155; --hl-stroke: 0px;
+  --band: 89 9 7; --outline: rgba(232, 210, 181, 0.4);
+  --slab-a: 232 210 181; --slab-b: 165 167 155; --slab-edge: 24 25 22;
+  --chip-bg: 232 210 181; --chip-ink: 42 6 5; --chip-sub: 89 9 7;
+  --display: "Bebas Neue", "Oswald", Impact, "Arial Narrow", sans-serif;
   color-scheme: dark;
 }
 :root[data-theme="light"] {
-  --bg: 246 248 252; --surface: 255 255 255; --raised: 241 245 251;
-  --ink: 11 16 32; --muted: 78 90 114;
-  --brand: 37 99 235; --brand-soft: 29 78 216;
-  --violet: 124 58 237; --violet-soft: 109 40 217;
-  --line: rgba(15, 23, 42, 0.12);
-  --glow-a: rgba(59, 130, 246, 0.14); --glow-b: rgba(139, 92, 246, 0.12);
-  --nav-bg: rgba(246, 248, 252, 0.85);
+  /* Light: muted sage grey page, cream cards, deep burgundy accent. */
+  --bg: 165 167 155; --surface: 232 210 181; --raised: 220 198 168;
+  --ink: 42 6 5; --muted: 84 30 27;
+  --brand: 89 9 7; --brand-soft: 89 9 7;
+  --violet: 62 64 54; --violet-soft: 62 64 54;
+  --line: rgba(89, 9, 7, 0.3);
+  --glow-a: transparent; --glow-b: transparent;
+  --nav-bg: rgba(165, 167, 155, 0.92);
+  --btn-ink: #E8D2B5;
+  --h1: 89 9 7; --hl: 232 210 181; --hl-stroke: 2px;
+  --band: 89 9 7; --outline: rgba(232, 210, 181, 0.95);
+  --slab-a: 232 210 181; --slab-b: 122 124 112; --slab-edge: 42 6 5;
+  --chip-bg: 89 9 7; --chip-ink: 232 210 181; --chip-sub: 190 176 150;
   color-scheme: light;
 }
 
@@ -29,7 +42,7 @@ body {
   font-family: "Geist Variable", system-ui, sans-serif; -webkit-font-smoothing: antialiased;
   transition: background-color .3s, color .3s;
 }
-::selection { background: rgba(139, 92, 246, 0.4); color: #fff; }
+::selection { background: rgb(var(--brand) / .35); color: rgb(var(--ink)); }
 :focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 3px; border-radius: 8px; }
 
 @layer components {
@@ -38,12 +51,13 @@ body {
 
   .eyebrow { font-family: "Geist Mono Variable", monospace; font-size: 12px; letter-spacing: .13em; text-transform: uppercase; color: rgb(var(--brand-soft)); }
   .h-display { font-weight: 650; letter-spacing: -0.035em; line-height: 1.05; }
-  .grad-text { background: linear-gradient(100deg, rgb(var(--brand)) 0%, rgb(var(--violet)) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .grad-text { color: rgb(var(--hl)); -webkit-text-stroke: var(--hl-stroke) rgb(var(--brand)); paint-order: stroke fill; }
+  .font-display { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .01em; }
 
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 18px; border-radius: 12px; font-size: 14px; font-weight: 500; border: 1px solid var(--line); background: rgb(var(--surface) / .5); transition: transform .2s, background .2s, border-color .2s; }
   .btn:hover { transform: translateY(-1px); border-color: rgb(var(--brand) / .5); }
-  .btn-primary { background: linear-gradient(135deg, #2563eb, #7c3aed); border-color: transparent; color: #fff; box-shadow: 0 8px 22px -12px rgba(99, 102, 241, .8); }
-  .btn-primary:hover { filter: brightness(1.08); border-color: transparent; }
+  .btn-primary { background: rgb(var(--brand)); border-color: transparent; color: var(--btn-ink); }
+  .btn-primary:hover { filter: brightness(1.07); border-color: transparent; }
 
   .card { position: relative; background: rgb(var(--surface)); border: 1px solid var(--line); border-radius: 18px; }
   .card-hover { transition: border-color .25s; }
@@ -65,10 +79,10 @@ body {
 .project-img { transition: transform .6s ease; }
 .shot:hover .project-img { transform: scale(1.025); }
 
-.hero-glow {
+.hero-glow-off {
   background: radial-gradient(600px 320px at 85% 10%, var(--glow-b), transparent 70%), radial-gradient(700px 380px at 10% 0%, var(--glow-a), transparent 70%);
 }
-.grid-bg {
+.grid-bg-off {
   background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 70% 55% at 60% 20%, #000 20%, transparent 75%);
@@ -77,21 +91,29 @@ body {
 }
 
 /* soft spotlight that follows the cursor on cards */
-.spot::before {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
-  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--brand) / .13), transparent 60%);
-}
-.spot:hover::before { opacity: 1; }
+.spot::before { content: none; }
 
 /* hero: moving gradient on the key words and data packets travelling along the stack diagram */
-.grad-move { background-size: 200% auto; animation: gradshift 7s ease-in-out infinite alternate; }
+.grad-move { animation: none; }
 @keyframes gradshift { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 .flow-line { stroke-dasharray: 4 5; animation: dash 1.4s linear infinite; }
 @keyframes dash { to { stroke-dashoffset: -18; } }
-.packet { position: absolute; left: 50%; top: 0; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 999px; background: rgb(var(--brand-soft)); box-shadow: 0 0 10px 2px rgb(var(--brand) / .7); animation: travel 1.8s ease-in-out infinite; }
-.packet.v { background: rgb(var(--violet-soft)); box-shadow: 0 0 10px 2px rgb(var(--violet) / .7); }
+.packet { position: absolute; left: 50%; top: 0; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 999px; background: rgb(var(--brand-soft));  animation: travel 1.8s ease-in-out infinite; }
+.packet.v { background: rgb(var(--violet-soft));  }
 @keyframes travel { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: calc(100% - 7px); opacity: 0; } }
 .live-dot { animation: ping 2.4s infinite; }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 rgb(var(--brand) / .6); } 70% { box-shadow: 0 0 0 8px rgb(var(--brand) / 0); } 100% { box-shadow: 0 0 0 0 rgb(var(--brand) / 0); } }
 @media (prefers-reduced-motion: reduce) { .grad-move, .flow-line, .packet, .live-dot { animation: none !important; } .packet { display: none; } }
 
+.type-caret { animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .type-caret { animation: none; } }
+
+.packet-h { position: absolute; top: 50%; left: 0; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 999px; background: rgb(var(--brand-soft));  animation: travel-h 1.8s ease-in-out infinite; }
+.packet-h.v { background: rgb(var(--violet-soft));  }
+@keyframes travel-h { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .packet-h { display: none; } }
+
+/* hero: diagonal band and outlined word behind the 3D stack */
+.hero-band { position: absolute; top: -14rem; bottom: -14rem; left: 14%; width: 74%; background: rgb(var(--band)); clip-path: polygon(52% 0, 100% 0, 48% 100%, 0 100%); }
+.hero-outline { position: absolute; left: 0; top: 0; font-family: var(--display); font-size: clamp(90px, min(15vw, 25vh), 210px); line-height: .8; letter-spacing: .02em; text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px var(--outline); pointer-events: none; user-select: none; white-space: nowrap; }

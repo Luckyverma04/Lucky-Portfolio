@@ -12,8 +12,10 @@
     "@emailjs/browser": "^4.4.1",
     "@fontsource-variable/geist": "^5.1.0",
     "@fontsource-variable/geist-mono": "^5.1.0",
+    "@fontsource/bebas-neue": "^5.1.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react-swc": "^3.5.0",

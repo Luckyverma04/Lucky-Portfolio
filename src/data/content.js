@@ -29,8 +29,7 @@ export const skills = [
   {
     group: "Machine Learning & AI",
     ml: true,
-    items: ["Python", "Machine Learning", "CNN fundamentals", "Model evaluation", "Semantic similarity", "Embeddings (BGE-M3)", "ML service integration"],
-    note: "I've studied the fundamentals and used embeddings in the BGV project. I haven't run ML in production.",
+    items: ["Python", "Machine Learning", "CNN fundamentals", "Model evaluation", "Semantic similarity", "Embeddings (BGE-M3)", "ML service integration"]
   },
   { group: "Tools", items: ["Git", "GitHub", "Postman", "Vite", "Render", "Vercel"] },
 ];
