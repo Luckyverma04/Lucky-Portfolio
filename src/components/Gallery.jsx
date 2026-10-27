@@ -37,11 +37,25 @@ function Lightbox({ images, index, onClose, onIndex }) {
 }
 
 // Shows the first image large, thumbnails below when there is more than one. Click to enlarge.
-export default function Gallery({ images, title, thumbsOnly = false }) {
+export default function Gallery({ images, title, thumbsOnly = false, stacked = false }) {
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
   if (!images.length) return null;
+
+  // stacked: every image shown full size, one below the other. Click any to enlarge.
+  if (stacked) {
+    return (
+      <div className="space-y-3">
+        {images.map((im, i) => (
+          <button key={im.src} type="button" onClick={() => { setActive(i); setOpen(true); }} className="group block w-full cursor-zoom-in overflow-hidden rounded-xl border border-line bg-bg" aria-label={`Enlarge ${title} image: ${im.caption}`}>
+            <img src={im.src} alt={`${title}: ${im.caption}`} loading="lazy" className="project-img w-full" />
+          </button>
+        ))}
+        {open && <Lightbox images={images} index={active} onClose={close} onIndex={setActive} />}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-2">

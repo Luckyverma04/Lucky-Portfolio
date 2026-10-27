@@ -49,8 +49,18 @@ function StackGraphic() {
 
 export default function Hero() {
   return (
-    <section id="top" className="hero-glow relative overflow-hidden pb-16 pt-28 md:pb-24 md:pt-40">
-      <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden="true" />
+    <section id="top" className="hero-bg relative overflow-hidden pb-16 pt-28 md:pb-24 md:pt-40">
+      {/* Hero background: dark red gradient (light pink in light mode). Lives here, so index.css stays untouched. */}
+      <style>{`
+        .hero-bg { background:
+          radial-gradient(900px 600px at 88% 45%, rgba(255, 70, 90, .55), transparent 65%),
+          linear-gradient(100deg, #12060a 0%, #2c0a12 30%, #7d1022 62%, #d91f36 100%); }
+        html[data-theme='light'] .hero-bg { background:
+          radial-gradient(900px 600px at 88% 45%, rgba(251, 113, 133, .55), transparent 65%),
+          linear-gradient(100deg, #fff5f6 0%, #ffe1e5 35%, #fdb4bf 68%, #f9748a 100%); }
+        html:not([data-theme='light']) .hero-bg { --ink: 248 250 252; --muted: 214 200 205; }
+      `}</style>
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true" style={{ background: "linear-gradient(180deg, transparent 80%, rgb(var(--bg)) 100%)" }} />
       <div className="wrap relative grid items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <Reveal>

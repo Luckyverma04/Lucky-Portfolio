@@ -56,7 +56,7 @@ function Card({ p, wide, delay }) {
   return (
     <Reveal delay={delay} className={wide ? "md:col-span-2" : ""}>
       <article className={`card card-hover spot grid h-full gap-5 p-5 md:p-6 ${wide ? "lg:grid-cols-2 lg:items-center lg:gap-8" : ""}`}>
-        <div className="self-start"><Gallery images={gallery(p.slug)} title={p.title} /></div>
+        <div className="self-start"><Gallery images={gallery(p.slug)} title={p.title} stacked /></div>
         <div className="flex flex-col justify-between gap-5">
           <div>
             <p className="eyebrow">{p.kicker}</p>
@@ -73,7 +73,7 @@ function Card({ p, wide, delay }) {
 
 export default function Projects() {
   return (
-    <Section id="projects" eyebrow="Projects" title="Things I've built" intro="Personal projects. The work I do at Trazoo is in the section above.">
+    <Section  id="projects" eyebrow="Projects" title="Things I've built" intro="Personal projects. The work I do at Trazoo is in the section above.">
       <div className="space-y-5">
         <Featured />
         <div className="grid gap-5 md:grid-cols-2">
