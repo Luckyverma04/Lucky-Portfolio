@@ -73,7 +73,7 @@ function Card({ p, wide, delay }) {
 
 export default function Projects() {
   return (
-    <Section n="04" id="projects" eyebrow="Projects" title="Things I've built" intro="Personal projects. The work I do at Trazoo is in the section above.">
+    <Section id="projects" eyebrow="Projects" title="Things I've built" intro="Personal projects. The work I do at Trazoo is in the section above.">
       <div className="space-y-5">
         <Featured />
         <div className="grid gap-5 md:grid-cols-2">
