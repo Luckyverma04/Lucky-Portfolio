@@ -1,3 +1,4 @@
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import Reveal from "./Reveal";
 import { Section, Stack, Links, Bullets } from "./Shared";
 import { job } from "../data/content";
@@ -5,9 +6,23 @@ import Gallery from "./Gallery";
 import { gallery } from "../data/gallery";
 import logo from "../assets/trazoo-logo.png";
 
+const LeadFlow3D = lazy(() => import("./LeadFlow3D"));
+function webgl() {
+  try { const c = document.createElement("canvas"); return !!(c.getContext("webgl2") || c.getContext("webgl")); } catch { return false; }
+}
+
 export default function Experience() {
+  const [wide, setWide] = useState(() => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches);
+  const [noGl, setNoGl] = useState(() => typeof window !== "undefined" && !webgl());
+  const onFail = useCallback(() => setNoGl(true), []);
+  useEffect(() => {
+    const m = window.matchMedia("(min-width: 1024px)");
+    const on = () => setWide(m.matches);
+    m.addEventListener("change", on);
+    return () => m.removeEventListener("change", on);
+  }, []);
   return (
-    <Section  id="experience" eyebrow="Work" title="Where I work">
+    <Section n="03" id="experience" eyebrow="Work" title="Where I work">
       <Reveal>
         <article className="card p-6 md:p-10">
           <div className="grid gap-10 lg:grid-cols-12">
@@ -22,6 +37,12 @@ export default function Experience() {
               <div className="mt-6"><Stack items={job.stack} /></div>
               <div className="mt-6"><Links p={job} liveLabel="Live site" /></div>
               <p className="mt-6 text-[13px] leading-relaxed text-muted">{job.companyNote}</p>
+              {wide && !noGl && (
+                <div className="mt-8 border-t border-line pt-6">
+                  <p className="eyebrow">How a lead moves</p>
+                  <Suspense fallback={<div className="h-[360px]" />}><LeadFlow3D onFail={onFail} /></Suspense>
+                </div>
+              )}
             </div>
 
             <div className="lg:col-span-8">

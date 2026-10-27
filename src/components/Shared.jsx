@@ -30,8 +30,7 @@ export const Bullets = ({ items }) => (
 export function Section({ id, n, eyebrow, title, intro, children }) {
   return (
     <section id={id} className="wrap py-16 md:py-20" aria-labelledby={`${id}-title`}>
-      <p className="eyebrow"><span className="text-muted">{n}</span> <span className="mx-1 text-muted">/</span> {eyebrow}</p>
-      <h2 id={`${id}-title`} className="font-display mt-3 text-5xl leading-[.95] text-[rgb(var(--h1))] md:text-7xl">{title}</h2>
+      <h2 id={`${id}-title`} className="font-display text-5xl leading-[.95] text-[rgb(var(--h1))] md:text-7xl">{title}</h2>
       {intro && <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{intro}</p>}
       <div className="mt-10 md:mt-12">{children}</div>
     </section>
