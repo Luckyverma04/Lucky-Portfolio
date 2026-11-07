@@ -1,32 +1,56 @@
-# Lucky Verma — Portfolio
+# Lucky Verma — 3D Portfolio
 
-Single-page React portfolio (React 18, Vite, Tailwind) with dark and light themes.
+Single-page portfolio built with React 18, Vite, Tailwind CSS and Three.js (React Three Fiber).
+Live: https://lucky-portfolio-tau.vercel.app
 
 ## Run locally
-    npm install
-    npm run dev        # http://localhost:5173
-    npm run build      # production build in dist/
-    npm run preview
 
-## Add your photo
-Save a portrait as `public/profile.jpg` (4:5 works best, about 800x1000). It appears in the About section automatically. Without the file, the photo slot is simply hidden.
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # production build in dist/
+npm run preview
+```
 
-## Add screenshots
-Put images in `src/assets/gallery/<project>/` (folders: `trazoo`, `staynearev`, `mergx`, `react-projects`, `background-verification`). They appear in filename order (`01-...`, `02-...`), with click-to-enlarge. No code changes needed. Use .webp or .jpg, about 1400px wide.
+## Add images (no code changes needed)
 
-## Environment variables (contact form, EmailJS)
-Copy your existing `.env` into this folder, or copy `.env.example` and fill in:
-- `VITE_APP_EMAILJS_SERVICE_ID`
-- `VITE_APP_EMAILJS_TEMPLATE_ID`
-- `VITE_APP_EMAILJS_PUBLIC_KEY`
-`.env` is git-ignored. Add the same three variables on your host.
+**Project screenshots** go in `src/assets/gallery/<project>/`:
 
-## Deploy (Render static site)
-- Build command: `npm install && npm run build`
-- Publish directory: `dist`
-- Add the three environment variables above.
-(`render.yaml` is included if you prefer a Blueprint.)
+| Folder | Shows up in |
+|---|---|
+| `background-verification/` | 01 Background Verification Software |
+| `lore/` | 02 LORE Website |
+| `staynearev/` | 03 StayNearEV |
+| `mergx/` | 04 Mergx |
+| `react-projects/` | 05 React Projects Collection |
+| `ml-journey/` | 06 ML Journey |
+| `trazoo/` | Career section (Trazoo) |
 
-## Edit content
-Everything lives in `src/data/content.js`.
-No resume button yet: put a PDF in `public/` and link it when you have one.
+- Images show in filename order, so name them `01-home.webp`, `02-dashboard.webp`, ...
+- `.webp`, `.jpg` or `.png` all work. About 1400–1600px wide and under ~300 KB keeps the page fast.
+- The first two images of a project stay on screen; any more play as a slideshow under them.
+
+**Your photo:** save it as `public/profile.jpg` (4:5, about 800x1000). It appears in the About section.
+
+## Edit text
+
+All content (projects, job, skills, links) lives in `src/data/content.js`.
+
+## Project structure
+
+```
+src/
+  components/   Page sections (Hero, About, WhatIDo, Experience, Projects, TechStack, Contact...)
+  three/        3D scenes: Bot (robot), HeroScene, DeskScene, TechBalls, LazyCanvas
+  data/         content.js (all text), gallery.js (loads screenshots)
+  assets/       gallery/ screenshots, tech/ logos, trazoo-logo.png
+public/         favicon, og.png, robots.txt, sitemap.xml
+```
+
+## Contact form (EmailJS)
+
+Copy `.env.example` to `.env` and fill in the three `VITE_APP_EMAILJS_*` values. Add the same variables on your host (Vercel or Render). Without them the form tells visitors to email directly.
+
+## Credits
+
+3D scenes are built from basic shapes in code; no downloaded models.

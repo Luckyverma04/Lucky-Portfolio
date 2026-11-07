@@ -22,7 +22,7 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || open ? "border-b border-line backdrop-blur-xl" : ""}`} style={{ background: scrolled || open ? "var(--nav-bg)" : "transparent" }}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled || open ? "border-b border-line" : ""}`} style={{ background: scrolled || open ? "var(--nav-bg)" : "transparent" }}>
       <nav className="wrap flex h-16 items-center justify-between" aria-label="Main">
         <a href="#top" className="text-lg font-extrabold tracking-tight" onClick={() => setOpen(false)} aria-label="Lucky Verma, back to top">
           L<span className="text-brand">V</span>

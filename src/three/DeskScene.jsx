@@ -123,8 +123,8 @@ export default function DeskScene() {
         <ContactShadows position={[0, -2.56, 0]} opacity={0.6} scale={8} blur={2.4} far={4} />
       </group>
       <Rig />
-      <EffectComposer multisampling={4}>
-        <Bloom mipmapBlur luminanceThreshold={1} intensity={0.9} radius={0.6} />
+      <EffectComposer multisampling={2}>
+        <Bloom mipmapBlur levels={5} luminanceThreshold={1} intensity={0.9} radius={0.6} />
       </EffectComposer>
     </>
   );

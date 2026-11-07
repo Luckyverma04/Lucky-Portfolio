@@ -42,20 +42,24 @@ function ScrollText({ text }) {
   const [p, setP] = useState(0);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setP(1); return; }
-    const on = () => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
       const r = ref.current.getBoundingClientRect();
       const vh = window.innerHeight;
-      setP(Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35))));
+      const v = Math.round(Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35))) * 60) / 60;
+      setP((old) => (old === v ? old : v));
     };
-    on();
+    const on = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
     window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
+    return () => { window.removeEventListener("scroll", on); cancelAnimationFrame(raf); };
   }, []);
   const words = text.split(" ");
   return (
     <p ref={ref} className="text-[clamp(22px,3.2vw,40px)] font-semibold leading-[1.25] tracking-tight">
       {words.map((w, i) => (
-        <span key={i} style={{ color: i / words.length < p ? "rgb(var(--ink))" : "rgb(var(--ink) / .16)", transition: "color .3s" }}>{w} </span>
+        <span key={i} style={{ color: i / words.length < p ? "rgb(var(--ink))" : "rgb(var(--ink) / .16)", transition: "color .25s" }}>{w} </span>
       ))}
     </p>
   );

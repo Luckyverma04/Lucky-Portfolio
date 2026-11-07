@@ -11,14 +11,18 @@ function useFill() {
   const ref = useRef(null);
   const [f, setF] = useState(0);
   useEffect(() => {
-    const on = () => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
       const r = ref.current?.getBoundingClientRect();
       if (!r) return;
-      setF(Math.min(1, Math.max(0, (window.innerHeight * 0.6 - r.top) / r.height)));
+      const v = Math.round(Math.min(1, Math.max(0, (window.innerHeight * 0.6 - r.top) / r.height)) * 100) / 100;
+      setF((old) => (old === v ? old : v));
     };
-    on();
+    const on = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
     window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
+    return () => { window.removeEventListener("scroll", on); cancelAnimationFrame(raf); };
   }, []);
   return [ref, f];
 }

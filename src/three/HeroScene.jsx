@@ -48,7 +48,7 @@ export default function HeroScene({ mobile }) {
       <spotLight position={[0, 5, -3]} angle={0.6} penumbra={1} intensity={60} color="#a78bfa" />
       <pointLight position={[-4, 1, 2]} intensity={30} color="#5eead4" />
       <pointLight position={[4, -1, 2]} intensity={30} color="#f472b6" />
-      <Environment resolution={256}>
+      <Environment resolution={128}>
         <Lightformer form="rect" intensity={2} position={[0, 4, 4]} scale={[8, 2, 1]} />
         <Lightformer form="rect" intensity={3} color="#5eead4" position={[-5, 0, 2]} rotation-y={Math.PI / 2} scale={[4, 6, 1]} />
         <Lightformer form="rect" intensity={3} color="#f472b6" position={[5, 0, 2]} rotation-y={-Math.PI / 2} scale={[4, 6, 1]} />
@@ -60,10 +60,10 @@ export default function HeroScene({ mobile }) {
         <Halo />
         <ContactShadows position={[0, -2.6, 0]} opacity={0.55} scale={8} blur={2.6} far={4} color="#000" />
       </group>
-      <Sparkles count={70} scale={[10, 6, 4]} size={2.2} speed={0.35} color="#99f6e4" opacity={0.7} />
+      <Sparkles count={45} scale={[10, 6, 4]} size={2.2} speed={0.35} color="#99f6e4" opacity={0.7} />
       <Rig />
-      <EffectComposer multisampling={4}>
-        <Bloom mipmapBlur luminanceThreshold={1} intensity={1.1} radius={0.7} />
+      <EffectComposer multisampling={2}>
+        <Bloom mipmapBlur levels={5} luminanceThreshold={1} intensity={1.1} radius={0.7} />
       </EffectComposer>
     </>
   );

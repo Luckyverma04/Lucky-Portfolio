@@ -14,7 +14,7 @@ import git from "../assets/tech/git.png";
 import redux from "../assets/tech/redux.png";
 
 // Next.js mark drawn inline (no image file in the repo for it).
-const next = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="62" fill="#000"/><path d="M45 40v48M45 40l42 54" stroke="#fff" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M84 40v30" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>');
+const next = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 128 128"><circle cx="64" cy="64" r="62" fill="#000"/><path d="M45 40v48M45 40l42 54" stroke="#fff" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M84 40v30" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>');
 
 const ICONS = [node, react, next, mongo, js, tw, git, redux, html, css, node, react, next, mongo];
 const R = 0.62;
@@ -75,7 +75,7 @@ function Balls() {
 
   return sim.map((b, i) => (
     <mesh key={i} ref={(el) => (meshes.current[i] = el)} position={b.pos}>
-      <sphereGeometry args={[R, 48, 48]} />
+      <sphereGeometry args={[R, 32, 32]} />
       <meshPhysicalMaterial color="#f1f0f7" roughness={0.18} clearcoat={1} clearcoatRoughness={0.1} />
       <Decal position={[0, 0, R]} rotation={[0, 0, 0]} scale={0.75}>
         <meshStandardMaterial map={tex[i]} transparent polygonOffset polygonOffsetFactor={-10} roughness={0.3} toneMapped={false} />

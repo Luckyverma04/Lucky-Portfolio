@@ -79,7 +79,7 @@ export default function Hero() {
         </div>
 
         <div className="pointer-events-auto flex flex-col items-center gap-4 md:absolute md:inset-x-0 md:bottom-10">
-          <p className="max-w-md rounded-full bg-bg/60 px-4 py-1.5 text-center text-sm text-muted backdrop-blur md:text-[15px]">
+          <p className="max-w-md rounded-full bg-bg/85 px-4 py-1.5 text-center text-sm text-muted md:text-[15px]">
             Node.js, Express, MongoDB and React. APIs, databases and the screens on top of them.
           </p>
           <div className="flex flex-wrap justify-center gap-2">

@@ -25,7 +25,7 @@ export default function LazyCanvas({ children, className = "", fallback = null, 
         <Suspense fallback={fallback}>
         <Canvas
           frameloop={visible ? "always" : "never"}
-          dpr={[1, Math.min(2, window.devicePixelRatio || 1)]}
+          dpr={[1, Math.min(1.5, window.devicePixelRatio || 1)]}
           gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
           {...props}
         >

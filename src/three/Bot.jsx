@@ -85,7 +85,7 @@ export default function Bot({ typing = false, follow = true, ...props }) {
       <group ref={body}>
         {/* torso */}
         <mesh position={[0, -1.55, 0]}>
-          <capsuleGeometry args={[0.62, 0.7, 12, 32]} />
+          <capsuleGeometry args={[0.62, 0.7, 8, 24]} />
           <meshStandardMaterial {...hoodie} />
         </mesh>
         {/* hoodie collar */}
