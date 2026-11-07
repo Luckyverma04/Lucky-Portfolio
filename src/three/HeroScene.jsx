@@ -1,0 +1,64 @@
+import { useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { ContactShadows, Environment, Float, Lightformer, Sparkles } from "@react-three/drei";
+import * as THREE from "three";
+import Bot from "./Bot";
+
+function Halo() {
+  const a = useRef(), b = useRef();
+  useFrame((s, dt) => {
+    if (a.current) a.current.rotation.z += dt * 0.15;
+    if (b.current) b.current.rotation.z -= dt * 0.1;
+  });
+  return (
+    <group position={[0, 0.1, -1.6]}>
+      <mesh ref={a}>
+        <torusGeometry args={[2.3, 0.012, 8, 160]} />
+        <meshBasicMaterial color="#5eead4" transparent opacity={0.55} toneMapped={false} />
+      </mesh>
+      <mesh ref={b} rotation={[0.3, 0.2, 0]}>
+        <torusGeometry args={[2.8, 0.008, 8, 160]} />
+        <meshBasicMaterial color="#f472b6" transparent opacity={0.4} toneMapped={false} />
+      </mesh>
+      <mesh>
+        <circleGeometry args={[2.2, 64]} />
+        <meshBasicMaterial color="#5eead4" transparent opacity={0.05} />
+      </mesh>
+    </group>
+  );
+}
+
+function Rig() {
+  const { camera, pointer } = useThree();
+  useFrame((_, dt) => {
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, pointer.x * 0.4, 2, dt);
+    camera.position.y = THREE.MathUtils.damp(camera.position.y, 0.2 + pointer.y * 0.25, 2, dt);
+    camera.lookAt(0, 0, 0);
+  });
+  return null;
+}
+
+export default function HeroScene({ mobile }) {
+  return (
+    <>
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[3, 4, 5]} intensity={1.4} />
+      <pointLight position={[-4, 1, 2]} intensity={30} color="#5eead4" />
+      <pointLight position={[4, -1, 2]} intensity={30} color="#f472b6" />
+      <Environment resolution={256}>
+        <Lightformer form="rect" intensity={2} position={[0, 4, 4]} scale={[8, 2, 1]} />
+        <Lightformer form="rect" intensity={3} color="#5eead4" position={[-5, 0, 2]} rotation-y={Math.PI / 2} scale={[4, 6, 1]} />
+        <Lightformer form="rect" intensity={3} color="#f472b6" position={[5, 0, 2]} rotation-y={-Math.PI / 2} scale={[4, 6, 1]} />
+      </Environment>
+      <group position={mobile ? [0, -0.75, 0] : [0, 0.25, 0]} scale={mobile ? 0.6 : 0.84}>
+        <Float speed={2} rotationIntensity={0.15} floatIntensity={0.6}>
+          <Bot position={[0, 0.7, 0]} />
+        </Float>
+        <Halo />
+        <ContactShadows position={[0, -2.6, 0]} opacity={0.55} scale={8} blur={2.6} far={4} color="#000" />
+      </group>
+      <Sparkles count={70} scale={[10, 6, 4]} size={2.2} speed={0.35} color="#99f6e4" opacity={0.7} />
+      <Rig />
+    </>
+  );
+}

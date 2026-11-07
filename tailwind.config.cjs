@@ -9,6 +9,7 @@ module.exports = {
         ink: c("ink"), muted: c("muted"),
         brand: c("brand"), "brand-soft": c("brand-soft"),
         violet: c("violet"), "violet-soft": c("violet-soft"),
+        pink: c("pink"),
       },
       borderColor: { line: "var(--line)" },
       fontFamily: {

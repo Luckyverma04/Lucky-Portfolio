@@ -1,35 +1,31 @@
-import { useEffect } from "react";
+import Loader from "./components/Loader";
+import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
+import Socials from "./components/Socials";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Skills from "./components/Skills";
+import WhatIDo from "./components/WhatIDo";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import TechStack from "./components/TechStack";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function App() {
-  useEffect(() => {
-    const onMove = (e) => {
-      const el = e.target.closest && e.target.closest(".spot");
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      el.style.setProperty("--my", `${e.clientY - r.top}px`);
-    };
-    document.addEventListener("mousemove", onMove, { passive: true });
-    return () => document.removeEventListener("mousemove", onMove);
-  }, []);
   return (
     <>
+      <Loader />
+      <Cursor />
       <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2">Skip to content</a>
       <Navbar />
+      <Socials />
       <main>
         <Hero />
         <About />
-        <Skills />
+        <WhatIDo />
         <Experience />
         <Projects />
+        <TechStack />
         <Contact />
       </main>
       <Footer />

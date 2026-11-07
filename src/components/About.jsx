@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
-import { Section } from "./Shared";
 import { about, education, profile, projects } from "../data/content";
 
 // Only numbers that can be checked in the repos or in the sections below.
@@ -18,15 +17,14 @@ function Count({ to }) {
   const ref = useRef(null);
   const [v, setV] = useState(0);
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { setV(to); return; }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setV(to); return; }
     let raf, started = false;
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting || started) return;
       started = true;
       const t0 = performance.now();
       const tick = (t) => {
-        const f = Math.min(1, (t - t0) / 1100);
+        const f = Math.min(1, (t - t0) / 1300);
         setV(Math.round(to * (1 - Math.pow(1 - f, 3))));
         if (f < 1) raf = requestAnimationFrame(tick);
       };
@@ -38,63 +36,69 @@ function Count({ to }) {
   return <span ref={ref}>{v}</span>;
 }
 
-export default function About() {
-  const [hasPhoto, setHasPhoto] = useState(true);
+/** The first paragraph lights up word by word as you scroll past it. */
+function ScrollText({ text }) {
+  const ref = useRef(null);
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setP(1); return; }
+    const on = () => {
+      const r = ref.current.getBoundingClientRect();
+      const vh = window.innerHeight;
+      setP(Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35))));
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  const words = text.split(" ");
   return (
-    <Section n="01" id="about" eyebrow="About" title="A bit about me">
-      <div className="grid gap-8 md:grid-cols-12">
-        <Reveal className={hasPhoto ? "md:col-span-5 lg:col-span-4" : "hidden"}>
-          <img
-            src={profile.photo}
-            alt={`Portrait of ${profile.name}`}
-            onError={() => setHasPhoto(false)}
-            className="aspect-[4/5] w-full max-w-sm rounded-2xl border border-line object-cover"
-          />
-        </Reveal>
-        <Reveal className={hasPhoto ? "md:col-span-7 lg:col-span-8" : "md:col-span-8"}>
-          <div className="space-y-5 text-[17px] leading-relaxed text-ink/90">{about.map((t) => <p key={t}>{t}</p>)}</div>
-          {hasPhoto && <div className="mt-8 max-w-md"><EduCard /></div>}
-        </Reveal>
-        {!hasPhoto && (
-          <Reveal className="md:col-span-4" delay={100}>
-            <EduCard />
-          </Reveal>
-        )}
-      </div>
-
-      <Reveal>
-        <ul className="mt-12 grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {FACTS.map((f) => (
-            <li key={f.label} className="card p-5">
-              <p className="font-display text-5xl leading-none text-[rgb(var(--h1))] md:text-6xl">
-                {f.pre && <span className="mr-1 align-middle font-mono text-xs normal-case tracking-normal text-muted">{f.pre}</span>}
-                <Count to={f.n} />
-              </p>
-              <p className="mt-3 text-sm leading-snug text-muted">{f.label}</p>
-            </li>
-          ))}
-        </ul>
-      </Reveal>
-    </Section>
+    <p ref={ref} className="text-[clamp(22px,3.2vw,40px)] font-semibold leading-[1.25] tracking-tight">
+      {words.map((w, i) => (
+        <span key={i} style={{ color: i / words.length < p ? "rgb(var(--ink))" : "rgb(var(--ink) / .16)", transition: "color .3s" }}>{w} </span>
+      ))}
+    </p>
   );
 }
 
-// Card that tilts a little towards the pointer (CSS 3D, no library). Off for touch and reduced motion.
-function EduCard() {
-  const ref = useRef(null);
-  const move = (e) => {
-    if (e.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const r = ref.current.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-    ref.current.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateZ(0)`;
-  };
-  const leave = () => { if (ref.current) ref.current.style.transform = ""; };
+export default function About() {
+  const [hasPhoto, setHasPhoto] = useState(true);
   return (
-    <div ref={ref} onPointerMove={move} onPointerLeave={leave}
-      className="card space-y-5 p-6 transition-transform duration-200 ease-out will-change-transform">
-      <div><p className="eyebrow">Education</p><h3 className="mt-2 font-semibold leading-snug">{education.degree}</h3><p className="mt-1 text-sm text-muted">{education.school}</p></div>
-      <hr className="border-line" />
-      <div><p className="eyebrow">Based in</p><p className="mt-2 text-sm text-muted">{profile.location}</p></div>
-    </div>
+    <section id="about" className="wrap relative py-24 md:py-32" aria-labelledby="about-title">
+      <div className="grid gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-3">
+          <Reveal>
+            <p className="eyebrow">About me</p>
+            <h2 id="about-title" className="h-display mt-3 text-5xl md:text-6xl">Who<br /><span className="grad-text">am I?</span></h2>
+            {hasPhoto && (
+              <img src={profile.photo} alt={`Portrait of ${profile.name}`} onError={() => setHasPhoto(false)}
+                className="frame mt-8 aspect-[4/5] w-full max-w-[260px] rounded-2xl object-cover" loading="lazy" />
+            )}
+          </Reveal>
+        </div>
+        <div className="lg:col-span-9">
+          <ScrollText text={about[0]} />
+          <Reveal className="mt-10 grid gap-6 text-[17px] leading-relaxed text-muted md:grid-cols-2">
+            {about.slice(1).map((t) => <p key={t}>{t}</p>)}
+          </Reveal>
+          <Reveal className="mt-8">
+            <p className="text-sm text-muted"><span className="text-brand">🎓</span> {education.degree} · {education.school}</p>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {FACTS.map((f, i) => (
+              <Reveal key={f.label} delay={i * 90}>
+                <div className="card card-hover h-full p-5">
+                  <p className="text-4xl font-extrabold tracking-tight md:text-5xl">
+                    {f.pre && <span className="text-base font-medium text-muted">{f.pre}</span>}
+                    <span className="grad-text"><Count to={f.n} /></span>
+                  </p>
+                  <p className="mt-2 text-sm text-muted">{f.label}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

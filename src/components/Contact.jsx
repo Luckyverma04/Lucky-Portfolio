@@ -1,14 +1,13 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Reveal from "./Reveal";
 import { Section } from "./Shared";
 import { Mail, Github, Linkedin, Arrow } from "./Icons";
 import { profile } from "../data/content";
 
-const Envelope3D = lazy(() => import("./Envelope3D"));
 
-const field = "mt-2 w-full rounded-xl border border-line bg-bg px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-muted/60 focus:border-brand";
-const row = "btn w-full !justify-between";
+const field = "mt-2 w-full rounded-xl bg-bg/70 border border-line bg-bg px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-muted/60 focus:border-brand";
+const row = "btn w-full !justify-between !rounded-2xl !py-4";
 
 // Tap one to start the message. Only fills the box while it is empty or still holds another starter.
 const STARTERS = {
@@ -17,25 +16,10 @@ const STARTERS = {
   "A question": "Hi Lucky, I had a question about your work: ",
 };
 
-function webgl() {
-  try { const c = document.createElement("canvas"); return !!(c.getContext("webgl2") || c.getContext("webgl")); } catch { return false; }
-}
-
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState({ type: "idle", text: "" });
-  const [typing, setTyping] = useState(false);
-  const [wide, setWide] = useState(() => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches);
-  const [noGl, setNoGl] = useState(() => typeof window !== "undefined" && !webgl());
-  const onFail = useCallback(() => setNoGl(true), []);
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  useEffect(() => {
-    const m = window.matchMedia("(min-width: 768px)");
-    const on = () => setWide(m.matches);
-    m.addEventListener("change", on);
-    return () => m.removeEventListener("change", on);
-  }, []);
 
   const start = (k) => setForm((f) => (!f.message || Object.values(STARTERS).includes(f.message) ? { ...f, message: STARTERS[k] } : f));
 
@@ -63,10 +47,11 @@ export default function Contact() {
   };
 
   return (
-    <Section id="contact" eyebrow="Contact" title="Say hello" intro="Got a project, a role to fill or a question about my work? Write a few lines and I'll reply.">
+    <Section id="contact" eyebrow="Contact" title="Say" accent="hello" intro="Got a project, a role to fill or a question about my work? Write a few lines and I'll reply.">
       <div className="grid gap-8 md:grid-cols-12 md:items-start">
         <Reveal className="md:col-span-5">
-          {wide && !noGl && <Suspense fallback={null}><Envelope3D open={typing} onFail={onFail} /></Suspense>}
+          <p className="h-display text-[clamp(56px,9vw,120px)]">Let's<br /><span className="grad-text">talk</span></p>
+          <p className="mb-8 mt-4 text-muted">Based in {profile.location}. Open to backend and full-stack roles.</p>
           <ul className="space-y-3">
             <li><a href={`mailto:${profile.email}`} className={row}><span className="flex items-center gap-2"><Mail /> {profile.email}</span><Arrow /></a></li>
             <li><a href={profile.linkedin} target="_blank" rel="noreferrer" className={row}><span className="flex items-center gap-2"><Linkedin /> LinkedIn</span><Arrow /></a></li>
@@ -76,13 +61,11 @@ export default function Contact() {
         <Reveal className="md:col-span-7" delay={100}>
           <form
             onSubmit={onSubmit}
-            onFocus={() => setTyping(true)}
-            onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setTyping(false); }}
-            className="card space-y-5 p-6 md:p-8"
-            style={{ borderColor: "rgb(var(--brand) / .5)" }}
+            className="card frame space-y-5 p-6 md:p-8"
+            style={{ borderColor: "rgb(var(--brand) / .35)" }}
           >
             <div>
-              <p className="font-display text-4xl leading-none text-[rgb(var(--h1))] md:text-5xl">Tell me what you're building</p>
+              <p className="text-3xl font-extrabold uppercase leading-none tracking-tight md:text-4xl">Tell me what you're building</p>
               <div className="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Start your message with">
                 <span className="text-sm text-muted">It's about</span>
                 {Object.keys(STARTERS).map((k) => (

@@ -13,8 +13,5 @@ Object.keys(files)
     (byProject[slug] ||= []).push({ src: files[path], caption: name });
   });
 
-// Debug: shows in the browser console (F12) which files were found. Delete these 2 lines later.
-console.log("gallery files:", Object.keys(files));
-console.log("staynearev count:", (byProject.staynearev || []).length);
 
 export const gallery = (slug) => byProject[slug] || [];
