@@ -14,7 +14,7 @@ const AREAS = [
   },
   {
     title: "Frontend", sub: "Screens people use every day",
-    text: "React dashboards for admins and associates, responsive layouts in Tailwind, and SEO setup for live sites.",
+    text: "React dashboards for admins and associates, Next.js sites that are pre-rendered and score 100 on PageSpeed, responsive layouts in Tailwind, and SEO setup for live sites.",
     tools: skills.find((s) => s.group === "Frontend").items,
   },
   {

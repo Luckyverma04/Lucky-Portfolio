@@ -1,9 +1,9 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import LazyCanvas from "../three/LazyCanvas";
-import { profile } from "../data/content";
+import { profile, mailHref } from "../data/content";
 
 const HeroScene = lazy(() => import("../three/HeroScene"));
-const ROLES = ["Backend", "MERN Stack", "API", "Full-Stack"];
+const ROLES = ["Backend", "MERN Stack", "Next.js", "Full-Stack"];
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function Letters({ text, start = 0 }) {
@@ -24,8 +24,8 @@ function Swap() {
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="swap grad-text">
-      {ROLES.map((r, k) => <span key={r} className={k === i ? "on" : k === (i - 1 + ROLES.length) % ROLES.length ? "off" : ""} aria-hidden={k !== i}>{r}</span>)}
+    <span className="swap">
+      {ROLES.map((r, k) => <span key={r} className={"grad-text " + (k === i ? "on" : k === (i - 1 + ROLES.length) % ROLES.length ? "off" : "")} aria-hidden={k !== i}>{r}</span>)}
     </span>
   );
 }
@@ -47,7 +47,7 @@ export default function Hero() {
   const [copied, setCopied] = useState(false);
   const copyEmail = async () => {
     try { await navigator.clipboard.writeText(profile.email); setCopied(true); setTimeout(() => setCopied(false), 1800); }
-    catch { window.location.href = `mailto:${profile.email}`; }
+    catch { window.open(mailHref, "_blank", "noopener"); }
   };
 
   return (
@@ -73,7 +73,7 @@ export default function Hero() {
           <div className="md:pt-24 md:text-right">
             <p className="text-base font-medium text-pink md:text-2xl">Developer for</p>
             <p className="h-display mt-1 text-[clamp(34px,5.4vw,72px)] text-ink/90">
-              <Swap /><span className="sr-only">Backend, MERN Stack, API and Full-Stack</span>
+              <Swap /><span className="sr-only">Backend, MERN Stack, Next.js and Full-Stack</span>
             </p>
           </div>
         </div>

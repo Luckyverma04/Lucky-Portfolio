@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Float, Lightformer, Sparkles } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 import Bot from "./Bot";
 
@@ -13,12 +14,12 @@ function Halo() {
   return (
     <group position={[0, 0.1, -1.6]}>
       <mesh ref={a}>
-        <torusGeometry args={[2.3, 0.012, 8, 160]} />
-        <meshBasicMaterial color="#5eead4" transparent opacity={0.55} toneMapped={false} />
+        <torusGeometry args={[2.3, 0.014, 8, 200]} />
+        <meshBasicMaterial color={[0.7, 2.6, 2.3]} transparent opacity={0.8} toneMapped={false} />
       </mesh>
       <mesh ref={b} rotation={[0.3, 0.2, 0]}>
         <torusGeometry args={[2.8, 0.008, 8, 160]} />
-        <meshBasicMaterial color="#f472b6" transparent opacity={0.4} toneMapped={false} />
+        <meshBasicMaterial color={[2.4, 0.8, 1.6]} transparent opacity={0.55} toneMapped={false} />
       </mesh>
       <mesh>
         <circleGeometry args={[2.2, 64]} />
@@ -41,8 +42,10 @@ function Rig() {
 export default function HeroScene({ mobile }) {
   return (
     <>
-      <ambientLight intensity={0.35} />
-      <directionalLight position={[3, 4, 5]} intensity={1.4} />
+      <color attach="background" args={["#090c14"]} />
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[3, 4, 5]} intensity={1.6} />
+      <spotLight position={[0, 5, -3]} angle={0.6} penumbra={1} intensity={60} color="#a78bfa" />
       <pointLight position={[-4, 1, 2]} intensity={30} color="#5eead4" />
       <pointLight position={[4, -1, 2]} intensity={30} color="#f472b6" />
       <Environment resolution={256}>
@@ -59,6 +62,9 @@ export default function HeroScene({ mobile }) {
       </group>
       <Sparkles count={70} scale={[10, 6, 4]} size={2.2} speed={0.35} color="#99f6e4" opacity={0.7} />
       <Rig />
+      <EffectComposer multisampling={4}>
+        <Bloom mipmapBlur luminanceThreshold={1} intensity={1.1} radius={0.7} />
+      </EffectComposer>
     </>
   );
 }

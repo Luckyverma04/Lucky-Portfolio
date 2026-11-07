@@ -1,4 +1,4 @@
-import { profile } from "../data/content";
+import { profile, mailHref } from "../data/content";
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
         <ul className="flex gap-6">
           <li><a className="link-u hover:text-ink" href={profile.github} target="_blank" rel="noreferrer">GitHub</a></li>
           <li><a className="link-u hover:text-ink" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></li>
-          <li><a className="link-u hover:text-ink" href={`mailto:${profile.email}`}>Email</a></li>
+          <li><a className="link-u hover:text-ink" href={mailHref} target="_blank" rel="noreferrer">Email</a></li>
         </ul>
       </div>
     </footer>

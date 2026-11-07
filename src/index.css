@@ -23,15 +23,6 @@ body {
 ::selection { background: rgb(var(--brand) / .35); color: #fff; }
 :focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 3px; border-radius: 8px; }
 
-/* soft coloured light in the corners of the page */
-body::before {
-  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(40vw 40vw at -10% 10%, rgb(var(--brand) / .10), transparent 60%),
-    radial-gradient(40vw 40vw at 110% 60%, rgb(var(--pink) / .09), transparent 60%),
-    radial-gradient(30vw 30vw at 50% 120%, rgb(var(--violet) / .10), transparent 60%);
-}
-
 @layer components {
   .wrap { max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
   @media (min-width: 768px) { .wrap { padding-left: 40px; padding-right: 40px; } }

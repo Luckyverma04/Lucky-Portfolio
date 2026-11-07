@@ -16,9 +16,13 @@ export default function Cursor() {
       el.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
+    const out = () => { el.style.opacity = "0"; };
+    const over = () => { el.style.opacity = ""; };
+    document.documentElement.addEventListener("mouseleave", out);
+    document.documentElement.addEventListener("mouseenter", over);
     window.addEventListener("mousemove", move, { passive: true });
     loop();
-    return () => { window.removeEventListener("mousemove", move); cancelAnimationFrame(raf); };
+    return () => { window.removeEventListener("mousemove", move); document.documentElement.removeEventListener("mouseleave", out); document.documentElement.removeEventListener("mouseenter", over); cancelAnimationFrame(raf); };
   }, []);
   return <div ref={ref} className="cursor" aria-hidden="true" />;
 }

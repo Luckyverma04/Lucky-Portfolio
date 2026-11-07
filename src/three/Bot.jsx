@@ -9,10 +9,10 @@ import * as THREE from "three";
  * typing = arms reach forward and tap, used in the desk scene.
  */
 const shell = { color: "#eceaf4", roughness: 0.25, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.15 };
-const visor = { color: "#070a12", roughness: 0.08, metalness: 0.6, clearcoat: 1 };
-const hoodie = { color: "#1a2033", roughness: 0.7, metalness: 0.05 };
-const TEAL = new THREE.Color("#5eead4");
-const PINK = new THREE.Color("#f472b6");
+const visor = { color: "#05070d", roughness: 0.35, metalness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.4, envMapIntensity: 0.25 };
+const hoodie = { color: "#1c2340", roughness: 0.6, metalness: 0.05 };
+const TEAL = new THREE.Color("#5eead4").multiplyScalar(2.2);
+const PINK = new THREE.Color("#f472b6").multiplyScalar(2);
 
 function Eye({ x, eyeRef }) {
   return (
@@ -66,7 +66,7 @@ export default function Bot({ typing = false, follow = true, ...props }) {
     let s = 1;
     if (b.t > b.next) { const k = (b.t - b.next) / 0.16; s = k < 1 ? Math.abs(1 - 2 * k) + 0.05 : 1; if (k >= 1) { b.t = 0; b.next = 2 + Math.random() * 3; } }
     eyes.forEach((e) => e.current && (e.current.scale.y = s));
-    if (bulb.current) bulb.current.material.color.copy(PINK).multiplyScalar(1.2 + Math.sin(t * 3) * 0.6);
+    if (bulb.current) bulb.current.material.color.copy(PINK).multiplyScalar(0.8 + Math.sin(t * 3) * 0.4);
     if (body.current && !typing) body.current.rotation.y = THREE.MathUtils.damp(body.current.rotation.y, x * 0.2, 3, dt);
     arms.forEach((a, i) => {
       if (!a.current) return;

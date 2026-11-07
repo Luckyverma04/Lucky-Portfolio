@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 import Reveal from "./Reveal";
 import { Section } from "./Shared";
 import { Mail, Github, Linkedin, Arrow } from "./Icons";
-import { profile } from "../data/content";
+import { profile, mailHref } from "../data/content";
 
 
 const field = "mt-2 w-full rounded-xl bg-bg/70 border border-line bg-bg px-4 py-3 text-[15px] outline-none transition-colors placeholder:text-muted/60 focus:border-brand";
@@ -53,7 +53,7 @@ export default function Contact() {
           <p className="h-display text-[clamp(56px,9vw,120px)]">Let's<br /><span className="grad-text">talk</span></p>
           <p className="mb-8 mt-4 text-muted">Based in {profile.location}. Open to backend and full-stack roles.</p>
           <ul className="space-y-3">
-            <li><a href={`mailto:${profile.email}`} className={row}><span className="flex items-center gap-2"><Mail /> {profile.email}</span><Arrow /></a></li>
+            <li><a href={mailHref} target="_blank" rel="noreferrer" className={row}><span className="flex items-center gap-2"><Mail /> {profile.email}</span><Arrow /></a></li>
             <li><a href={profile.linkedin} target="_blank" rel="noreferrer" className={row}><span className="flex items-center gap-2"><Linkedin /> LinkedIn</span><Arrow /></a></li>
             <li><a href={profile.github} target="_blank" rel="noreferrer" className={row}><span className="flex items-center gap-2"><Github /> GitHub</span><Arrow /></a></li>
           </ul>

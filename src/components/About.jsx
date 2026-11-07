@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 import { about, education, profile, projects } from "../data/content";
 
 // Only numbers that can be checked in the repos or in the sections below.
-const since = new Date(2026, 0, 1);
+const since = new Date(2025, 8, 1);
 const now = new Date();
 const months = Math.max(1, (now.getFullYear() - since.getFullYear()) * 12 + now.getMonth() - since.getMonth() + 1);
 const FACTS = [

@@ -11,9 +11,12 @@ export const profile = {
   photo: "/profile.jpg",
 };
 
+// Opens a Gmail compose window in the browser. A plain mailto: link does nothing when no mail app is set up.
+export const mailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`;
+
 export const about = [
   "I'm a software engineer with a B.Tech in Computer Science. Backend is what I enjoy most: shaping the data, building the API, and thinking through what happens when something goes wrong. I'm comfortable on the React side too, so I can take a feature from the database all the way to the screen.",
-  "At Trazoo Global I work on a live B2B gifting platform, mostly the lead and enquiry system the sales team uses. On my own time I built StayNearEV (EV charger booking), Mergx (PDF and image tools) and a background-verification backend that mixes simple matching rules with BGE-M3 similarity.",
+  "At Trazoo Global I work on a live B2B gifting platform, mostly the lead and enquiry system the sales team uses. On my own time I built StayNearEV (EV charger booking), Mergx (PDF and image tools) a background-verification backend that mixes simple matching rules with BGE-M3 similarity, and most recently a Next.js website for the Lore app.",
   "I'm early in my career, so I'd rather show the code than talk it up. Every project below links to its repo.",
 ];
 
@@ -24,7 +27,7 @@ export const education = {
 
 export const skills = [
   { group: "Backend", items: ["Node.js", "Express.js", "REST APIs", "MongoDB", "Mongoose", "JWT Authentication", "Database Design", "API Integration"] },
-  { group: "Frontend", items: ["React.js", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Axios"] },
+  { group: "Frontend", items: ["React.js", "Next.js", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Axios"] },
   { group: "Programming & CS", items: ["JavaScript", "Java", "C++", "C", "SQL", "Data Structures & Algorithms", "OOP", "DBMS"] },
   {
     group: "Machine Learning & AI",
@@ -61,6 +64,22 @@ export const bgv = {
 };
 
 export const projects = [
+  {
+    title: "LORE Website",
+    kicker: "Next.js site for an Android app",
+    slug: "lore",
+    summary: "A redesign of the website for Lore: Viral Star Bano, an Android app that turns a photo into a share-ready video. Built to be fast and easy for Google and AI assistants to read.",
+    points: [
+      "Next.js 16 App Router with every page pre-rendered as static HTML, so crawlers get the full text without running JavaScript.",
+      "PageSpeed 100 on performance, accessibility, best practices and SEO for the home page on mobile and desktop. Mobile LCP 1.0 s.",
+      "JSON-LD for Organization, WebSite, MobileApplication and FAQPage, with the FAQ schema matching the visible text word for word.",
+      "3D phone preview in React Three Fiber, loaded only after the first interaction, plus a 3D template wall and GSAP scroll animations.",
+      "FAQ written in English and Hinglish. All facts come from the Play Store listing, kept in one file.",
+    ],
+    stack: ["Next.js", "React 19", "Tailwind CSS v4", "GSAP", "React Three Fiber", "Vercel"],
+    live: "https://lore-website-rho.vercel.app",
+    code: `${GH}/LORE_Website`,
+  },
   {
     title: "StayNearEV",
     kicker: "EV charging station listing and booking",
@@ -106,7 +125,7 @@ export const job = {
   slug: "trazoo",
   role: "Web Developer",
   company: "Trazoo Global LLP",
-  period: "January 2026 – Present",
+  period: "September 2025 – Present",
   about: "A B2B corporate gifting and merchandise platform (trazooglobal.com).",
   companyNote: "The business reports 20+ enterprise clients and 30,000+ kits shipped. Those are company figures, not my results.",
   intro:

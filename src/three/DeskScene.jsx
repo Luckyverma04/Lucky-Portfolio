@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Float, Lightformer, RoundedBox } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 import Bot from "./Bot";
 
@@ -53,7 +54,7 @@ function Screen() {
   return (
     <mesh ref={ref} position={[0, 0.02, -0.035]} rotation={[0, Math.PI, 0]}>
       <planeGeometry args={[1.3, 0.8]} />
-      <meshBasicMaterial color="#f472b6" transparent toneMapped={false} />
+      <meshBasicMaterial color={[2, 0.7, 1.4]} transparent toneMapped={false} />
     </mesh>
   );
 }
@@ -74,6 +75,7 @@ const white = { color: "#e9e7f2", roughness: 0.3, metalness: 0.05 };
 export default function DeskScene() {
   return (
     <>
+      <color attach="background" args={["#090c14"]} />
       <ambientLight intensity={0.4} />
       <directionalLight position={[4, 6, 4]} intensity={1.3} />
       <pointLight position={[0, 0.2, -0.3]} intensity={3} color="#f472b6" distance={3} />
@@ -106,7 +108,7 @@ export default function DeskScene() {
               <RoundedBox args={[1.45, 0.92, 0.05]} radius={0.02}><meshStandardMaterial color="#9aa3b8" metalness={0.8} roughness={0.25} /></RoundedBox>
               <Screen />
               {/* glowing logo on the back */}
-              <mesh position={[0, 0, 0.03]}><circleGeometry args={[0.09, 32]} /><meshBasicMaterial color="#5eead4" toneMapped={false} /></mesh>
+              <mesh position={[0, 0, 0.03]}><circleGeometry args={[0.09, 32]} /><meshBasicMaterial color={[0.8, 2.6, 2.3]} toneMapped={false} /></mesh>
             </group>
           </group>
         </group>
@@ -119,12 +121,11 @@ export default function DeskScene() {
         <Panel seed={3} position={[1.9, 1.6, -1.2]} rotation={[0, -0.4, 0]} scale={0.8} />
 
         <ContactShadows position={[0, -2.56, 0]} opacity={0.6} scale={8} blur={2.4} far={4} />
-        <mesh position={[0, -2.57, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <circleGeometry args={[2.2, 64]} />
-          <meshBasicMaterial color="#f472b6" transparent opacity={0.08} />
-        </mesh>
       </group>
       <Rig />
+      <EffectComposer multisampling={4}>
+        <Bloom mipmapBlur luminanceThreshold={1} intensity={0.9} radius={0.6} />
+      </EffectComposer>
     </>
   );
 }

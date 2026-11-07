@@ -13,7 +13,10 @@ import tw from "../assets/tech/tailwind.png";
 import git from "../assets/tech/git.png";
 import redux from "../assets/tech/redux.png";
 
-const ICONS = [node, react, mongo, js, tw, git, redux, html, css, node, react, mongo, js];
+// Next.js mark drawn inline (no image file in the repo for it).
+const next = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="62" fill="#000"/><path d="M45 40v48M45 40l42 54" stroke="#fff" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M84 40v30" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>');
+
+const ICONS = [node, react, next, mongo, js, tw, git, redux, html, css, node, react, next, mongo];
 const R = 0.62;
 
 /**
