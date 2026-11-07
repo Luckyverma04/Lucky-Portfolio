@@ -4,6 +4,8 @@ Drop screenshots into the folder of the project they belong to:
   staynearev/               -> StayNearEV card
   mergx/                    -> Mergx card
   react-projects/           -> React Projects card
+  lore/                     -> LORE Website card
+  ml-journey/               -> ML Journey card
   background-verification/  -> BGV card (optional)
 
 Images show in filename order (01-..., 02-..., 03-...). No code changes needed.

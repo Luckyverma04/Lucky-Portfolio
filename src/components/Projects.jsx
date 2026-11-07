@@ -12,6 +12,7 @@ function Featured() {
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full blur-3xl" style={{ background: "rgb(var(--violet) / .18)" }} aria-hidden="true" />
         <div className="relative">
           <div className="flex flex-wrap items-center gap-3">
+            <span className="font-mono text-5xl font-bold text-ink/10" aria-hidden="true">01</span>
             <span className="eyebrow !text-violet-soft">{bgv.kicker}</span>
             <span className="rounded-full border border-line px-2.5 py-0.5 text-xs text-muted">{bgv.status}</span>
           </div>
@@ -62,13 +63,13 @@ function Card({ p, wide, delay, n }) {
           <div className="self-start"><Gallery images={gallery(p.slug)} title={p.title} stacked lead={2} /></div>
           <div className="flex flex-col justify-between gap-5">
             <div>
-              <p className="font-mono text-5xl font-bold text-ink/10">0{n}</p>
-              <p className="eyebrow mt-1">{p.kicker}</p>
+              <p className="font-mono text-5xl font-bold text-ink/10" aria-hidden="true">{String(n).padStart(2, "0")}</p>
+              <p className={`eyebrow mt-1 ${p.ml ? "!text-violet-soft" : ""}`}>{p.kicker}</p>
               <h3 className="mt-2 text-3xl font-extrabold uppercase tracking-tight">{p.title}</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-muted">{p.summary}</p>
               <div className="mt-4"><Bullets items={p.points} /></div>
             </div>
-            <div className="space-y-4"><Stack items={p.stack} /><Links p={p} /></div>
+            <div className="space-y-4"><Stack items={p.stack} ml={p.ml ? p.stack : []} /><Links p={p} /></div>
           </div>
         </article>
       </Tilt>
@@ -78,11 +79,12 @@ function Card({ p, wide, delay, n }) {
 
 export default function Projects() {
   return (
-    <Section id="projects" eyebrow="Projects" title="Things" accent="I've built" intro="Personal projects and a client trial. The work I do at Trazoo is in the section above.">
+    <Section id="projects" eyebrow="Projects" title="Things" accent="I've built" intro="Six projects: personal builds, a client trial and my ML notebooks. The work I do at Trazoo is in the section above.">
       <div className="space-y-6">
         <Featured />
         <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((p, i) => <Card key={p.title} p={p} n={i + 1} wide={i === 0} delay={i * 80} />)}
+          {/* the featured BGV project above is 01, so these start at 02 */}
+          {projects.map((p, i) => <Card key={p.title} p={p} n={i + 2} wide={i === 0} delay={(i % 2) * 80} />)}
         </div>
       </div>
     </Section>

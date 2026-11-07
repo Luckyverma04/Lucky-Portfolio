@@ -119,6 +119,22 @@ export const projects = [
     stack: ["React", "Redux Toolkit", "React Router", "Context API"],
     code: `${GH}/React`,
   },
+  {
+    title: "ML Journey",
+    kicker: "Learning ML in public, one notebook a day",
+    slug: "ml-journey",
+    ml: true,
+    summary: "My day-by-day machine learning notebooks, two mini projects, and a small face-matching service that grew out of them for the BGV project.",
+    points: [
+      "Data cleaning with pandas and NumPy, then linear regression on a small dataset (Mini Project 1).",
+      "Classifiers compared side by side: logistic regression, KNN, decision tree and random forest, scored with precision, recall, F1 and a confusion matrix.",
+      "Spam detector (Mini Project 2): four models trained on the same data to see which one holds up.",
+      "Scaling and pipelines in scikit-learn, then first neural networks in PyTorch (nn.Sequential on the digits dataset) and image work in OpenCV.",
+      "bgv_face_service: a FastAPI endpoint that finds the face in a reference photo and in up to 15 candidate photos (OpenCV YuNet + SFace), scores each pair, and labels it ACCEPT, HUMAN_REVIEW or REJECT. Tested with pytest.",
+    ],
+    stack: ["Python", "pandas", "NumPy", "scikit-learn", "PyTorch", "OpenCV", "FastAPI", "Jupyter"],
+    code: `${GH}/ml-journey`,
+  },
 ];
 
 export const job = {
