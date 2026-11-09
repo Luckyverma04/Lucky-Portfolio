@@ -16,7 +16,7 @@ export const mailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${profile
 
 export const about = [
   "I'm a software engineer with a B.Tech in Computer Science. Backend is what I enjoy most: shaping the data, building the API, and thinking through what happens when something goes wrong. I'm comfortable on the React side too, so I can take a feature from the database all the way to the screen.",
-  "At Trazoo Global I work on a live B2B gifting platform, mostly the lead and enquiry system the sales team uses. On my own time I built StayNearEV (EV charger booking), Mergx (PDF and image tools) a background-verification backend that mixes simple matching rules with BGE-M3 similarity, and most recently a Next.js website for the Lore app.",
+  "At Trazoo Global I work on a live B2B gifting platform, mostly the lead and enquiry system the sales team uses. On my own time I built StayNearEV (EV charger map and booking), Mergx (PDF and image tools) a background-verification backend that mixes simple matching rules with BGE-M3 similarity, and most recently a Next.js website for the Lore app.",
   "I'm early in my career, so I'd rather show the code than talk it up. Every project below links to its repo.",
 ];
 
@@ -82,17 +82,19 @@ export const projects = [
   },
   {
     title: "StayNearEV",
-    kicker: "EV charging station listing and booking",
+    kicker: "EV charging: find, get directions, book",
     slug: "staynearev",
-    summary: "Drivers find charging stations nearby and book a slot. Admins manage stations and bookings from a dashboard.",
+    summary: "Drivers find EV chargers on a map, get directions and book a slot. Owners list their own charger and manage the bookings. Anyone can browse; login is asked only when you book or list.",
     points: [
-      "Express and MongoDB REST API with separate user, station and booking modules, plus JWT authentication.",
-      "OTP email verification that can be switched on or off with a flag.",
-      "Station photos upload through Cloudinary.",
-      "Merged the separate host and customer roles into one across models, controllers and UI, and wrote the migration for existing data.",
-      "Fixed mobile bugs: overflow, a clipped navbar, and tap versus hover behaviour.",
+      "Map view with React Leaflet and OpenStreetMap: StayNearEV stations and public chargers (OpenStreetMap + Open Charge Map API) on one map, sorted by distance from you.",
+      "A Directions button on every charger opens the route in Google Maps. Owners drop a map pin when they list a station.",
+      "Email at every step, sent through Brevo: OTP verification, welcome, booking received, new-booking alert for the owner, confirmed or rejected, cancelled, and an admin alert on every signup.",
+      "Sign in with Google, or email with an OTP code.",
+      "Booking flow: slot overlap check (pending bookings count too), a booking-confirmed screen, Upcoming / Active / Past tabs, and a bookings view for station owners.",
+      "Profile page with booking stats and name edit. Deleting an account also removes that user's stations and bookings.",
+      "Express and MongoDB REST API with JWT, station photos on Cloudinary, and a 3D charger in the hero built with Three.js.",
     ],
-    stack: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind", "Cloudinary"],
+    stack: ["React", "React Leaflet", "Three.js", "Node.js", "Express", "MongoDB", "JWT", "Google sign-in", "Brevo", "Cloudinary", "Tailwind"],
     live: "https://staynearevfrontend.onrender.com",
     code: `${GH}/StayNearEvFrontend`,
     backend: `${GH}/StayNearEv`,
