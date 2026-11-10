@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import LazyCanvas from "../three/LazyCanvas";
 import { profile, mailHref } from "../data/content";
 
@@ -83,11 +84,11 @@ export default function Hero() {
             Node.js, Express, MongoDB and React. APIs, databases and the screens on top of them.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
-            <a href="#projects" className="btn btn-primary">See my work</a>
+            <Link to="/projects" className="btn btn-primary">See my work</Link>
             <button type="button" onClick={copyEmail} className="btn">{copied ? "Email copied ✓" : "Copy email"}</button>
           </div>
           <span className="sr-only" role="status">{copied ? "Email address copied" : ""}</span>
-          <a href="#about" aria-label="Scroll down" className="scroll-hint mt-2 hidden md:block" />
+          <a href="#work" aria-label="Scroll down" className="scroll-hint mt-2 hidden md:block" />
         </div>
       </div>
     </section>

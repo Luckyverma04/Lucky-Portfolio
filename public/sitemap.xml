@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://lucky-portfolio-e8rc.onrender.com/</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/about</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/experience</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/contact</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects/background-verification</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects/lore</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects/staynearev</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects/mergx</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects/react-projects</loc></url>
+  <url><loc>https://lucky-portfolio-e8rc.onrender.com/projects/ml-journey</loc></url>
 </urlset>

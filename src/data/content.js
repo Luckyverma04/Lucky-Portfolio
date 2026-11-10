@@ -17,7 +17,7 @@ export const mailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${profile
 export const about = [
   "I'm a software engineer with a B.Tech in Computer Science. Backend is what I enjoy most: shaping the data, building the API, and thinking through what happens when something goes wrong. I'm comfortable on the React side too, so I can take a feature from the database all the way to the screen.",
   "At Trazoo Global I work on a live B2B gifting platform, mostly the lead and enquiry system the sales team uses. On my own time I built StayNearEV (EV charger map and booking), Mergx (PDF and image tools) a background-verification backend that mixes simple matching rules with BGE-M3 similarity, and most recently a Next.js website for the Lore app.",
-  "I'm early in my career, so I'd rather show the code than talk it up. Every project below links to its repo.",
+  "I'm early in my career, so I'd rather show the code than talk it up. Every project on the Projects page links to its repo.",
 ];
 
 export const education = {
