@@ -50,8 +50,8 @@ export default function Contact() {
     <Section id="contact" eyebrow="Contact" title="Say" accent="hello" intro="Got a project, a role to fill or a question about my work? Write a few lines and I'll reply.">
       <div className="grid gap-8 md:grid-cols-12 md:items-start">
         <Reveal className="md:col-span-5">
-          <p className="h-display text-[clamp(56px,9vw,120px)]">Let's<br /><span className="grad-text">talk</span></p>
-          <p className="mb-8 mt-4 text-muted">Based in {profile.location}. Open to backend and full-stack roles.</p>
+          <p className="h-display hidden text-[clamp(56px,9vw,120px)] md:block">Let's<br /><span className="grad-text">talk</span></p>
+          <p className="mb-6 text-muted md:mb-8 md:mt-4">Based in {profile.location}. Open to backend and full-stack roles.</p>
           <ul className="space-y-3">
             <li><a href={mailHref} target="_blank" rel="noreferrer" className={row}><span className="flex items-center gap-2"><Mail /> {profile.email}</span><Arrow /></a></li>
             <li><a href={profile.linkedin} target="_blank" rel="noreferrer" className={row}><span className="flex items-center gap-2"><Linkedin /> LinkedIn</span><Arrow /></a></li>

@@ -63,7 +63,7 @@ export default function Hero() {
         <Suspense fallback={null}><HeroScene mobile={mobile} /></Suspense>
       </LazyCanvas>
 
-      <div className="wrap pointer-events-none relative flex h-full flex-col justify-between pb-10 pt-24 md:justify-center md:pb-0 md:pt-0">
+      <div className="wrap pointer-events-none relative flex h-full flex-col justify-between pb-24 pt-20 md:justify-center md:pb-0 md:pt-0">
         <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center md:gap-6">
           <div>
             <p className="text-lg font-medium text-brand md:text-2xl">Hello! I'm</p>
@@ -80,7 +80,7 @@ export default function Hero() {
         </div>
 
         <div className="pointer-events-auto flex flex-col items-center gap-4 md:absolute md:inset-x-0 md:bottom-10">
-          <p className="max-w-[34ch] text-center text-sm leading-relaxed text-ink/75 [text-shadow:0_1px_12px_rgb(9_12_20),0_0_2px_rgb(9_12_20)] md:max-w-none md:text-[15px]">
+          <p className="hidden max-w-[34ch] text-center text-sm leading-relaxed sm:block text-ink/75 [text-shadow:0_1px_12px_rgb(9_12_20),0_0_2px_rgb(9_12_20)] md:max-w-none md:text-[15px]">
             Node.js · Express · MongoDB · React <span className="text-ink/40">—</span> APIs, databases and the screens on top.
           </p>
           <div className="flex flex-wrap justify-center gap-2">

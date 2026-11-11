@@ -53,7 +53,7 @@ export default function HeroScene({ mobile }) {
         <Lightformer form="rect" intensity={3} color="#5eead4" position={[-5, 0, 2]} rotation-y={Math.PI / 2} scale={[4, 6, 1]} />
         <Lightformer form="rect" intensity={3} color="#f472b6" position={[5, 0, 2]} rotation-y={-Math.PI / 2} scale={[4, 6, 1]} />
       </Environment>
-      <group position={mobile ? [0, -0.35, 0] : [0, 0.42, 0]} scale={mobile ? 0.52 : 0.8}>
+      <group position={mobile ? [0, -0.45, 0] : [0, 0.42, 0]} scale={mobile ? 0.46 : 0.8}>
         <Float speed={2} rotationIntensity={0.15} floatIntensity={0.6}>
           <Bot position={[0, 0.7, 0]} />
         </Float>

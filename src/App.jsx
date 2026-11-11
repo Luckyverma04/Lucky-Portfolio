@@ -46,7 +46,7 @@ export default function App() {
           </Routes>
         </Suspense>
       </main>
-      <Footer />
+      <div className="pb-[76px] md:pb-0"><Footer /></div>
     </BrowserRouter>
   );
 }

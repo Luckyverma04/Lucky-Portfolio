@@ -63,8 +63,8 @@ body {
 /* rotating word in the hero */
 .swap { display: inline-grid; }
 .swap > span { grid-area: 1 / 1; opacity: 0; transform: translateY(40%); transition: opacity .5s, transform .5s; }
-.swap > span.on { opacity: 1; transform: none; }
-.swap > span.off { opacity: 0; transform: translateY(-40%); transition-duration: .25s; }
+.swap > span.on { opacity: 1; transform: none; transition-delay: .18s; }
+.swap > span.off { opacity: 0; transform: translateY(-40%); transition-duration: .18s; }
 @media (min-width: 768px) { .swap > span { justify-self: end; } }
 
 /* skills ticker */

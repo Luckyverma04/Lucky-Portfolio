@@ -24,9 +24,11 @@ export default function Home() {
           </div>
           <Link to="/projects" className="btn">All {allProjects.length} projects →</Link>
         </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {allProjects.slice(0, 3).map((p, i) => <Reveal key={p.slug} delay={i * 80}><ProjectCard p={p} /></Reveal>)}
+        {/* phones: swipe sideways through the cards; bigger screens: a grid */}
+        <div className="-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] md:mx-0 md:mt-12 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3">
+          {allProjects.slice(0, 3).map((p, i) => <Reveal key={p.slug} delay={i * 80} className="w-[82%] shrink-0 snap-center md:w-auto"><ProjectCard p={p} /></Reveal>)}
         </div>
+        <p className="mt-3 text-center text-xs text-muted md:hidden">Swipe for more →</p>
       </section>
 
       <section className="wrap pb-20 md:pb-24" aria-label="Current job">
