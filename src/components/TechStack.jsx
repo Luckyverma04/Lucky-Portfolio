@@ -27,7 +27,7 @@ export default function TechStack() {
         <h2 id="skills-title" className="h-display mt-3 text-[clamp(40px,7vw,88px)]">My <span className="grad-text">techstack</span></h2>
         <p className="mt-4 text-muted">Move your mouse through the balls and push them around.</p>
       </Reveal>
-      <LazyCanvas className="mx-auto mt-6 h-[460px] max-w-6xl md:h-[520px]" camera={{ position: [0, 0, 9], fov: 45 }} data-cursor>
+      <LazyCanvas preload className="mx-auto mt-6 h-[460px] max-w-6xl md:h-[520px]" camera={{ position: [0, 0, 9], fov: 45 }} data-cursor>
         <Suspense fallback={null}><TechBalls /></Suspense>
       </LazyCanvas>
       <div className="mt-6 space-y-3">

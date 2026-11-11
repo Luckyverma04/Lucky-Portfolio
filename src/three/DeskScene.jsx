@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Float, Lightformer, RoundedBox } from "@react-three/drei";
 import Quality from "./Quality";
+import Glow from "./Glow";
 import * as THREE from "three";
 import Bot from "./Bot";
 
@@ -107,7 +108,9 @@ export default function DeskScene() {
             <group position={[0, 0.45, 0]}>
               <RoundedBox args={[1.45, 0.92, 0.05]} radius={0.02}><meshStandardMaterial color="#9aa3b8" metalness={0.8} roughness={0.25} /></RoundedBox>
               <Screen />
+              <Glow color="#f472b6" position={[0, 0, -0.3]} size={2.2} opacity={0.35} />
               {/* glowing logo on the back */}
+              <Glow position={[0, 0, 0.06]} size={0.6} opacity={0.6} />
               <mesh position={[0, 0, 0.03]}><circleGeometry args={[0.09, 32]} /><meshBasicMaterial color={[0.8, 2.6, 2.3]} toneMapped={false} /></mesh>
             </group>
           </group>
@@ -123,7 +126,7 @@ export default function DeskScene() {
         <ContactShadows frames={1} position={[0, -2.56, 0]} opacity={0.6} scale={8} blur={2.4} far={4} />
       </group>
       <Rig />
-      <Quality intensity={0.9} />
+      <Quality />
     </>
   );
 }

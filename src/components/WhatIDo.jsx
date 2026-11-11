@@ -34,7 +34,7 @@ export default function WhatIDo() {
             <p className="eyebrow">What I do</p>
             <h2 id="work-title" className="h-display mt-3 text-[clamp(52px,9vw,120px)]">What<br />I <span className="grad-text">do</span></h2>
           </Reveal>
-          <LazyCanvas className="-mt-16 h-[380px] md:-mt-28 md:h-[560px]" camera={{ position: [6.2, 2.6, 6.2], fov: 32 }}>
+          <LazyCanvas preload className="-mt-16 h-[380px] md:-mt-28 md:h-[560px]" camera={{ position: [6.2, 2.6, 6.2], fov: 32 }}>
             <Suspense fallback={null}><DeskScene /></Suspense>
           </LazyCanvas>
         </div>

@@ -2,14 +2,15 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
+import Glow from "./Glow";
 
 /**
  * "LV-bot": a small developer robot built from basic shapes (no downloaded model).
  * The head turns toward the mouse, the eyes blink, the antenna light pulses.
  * typing = arms reach forward and tap, used in the desk scene.
  */
-const shell = { color: "#eceaf4", roughness: 0.25, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.15 };
-const visor = { color: "#05070d", roughness: 0.35, metalness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.4, envMapIntensity: 0.25 };
+const shell = { color: "#eceaf4", roughness: 0.18, metalness: 0.1 };
+const visor = { color: "#05070d", roughness: 0.3, metalness: 0.2, envMapIntensity: 0.3 };
 const hoodie = { color: "#1c2340", roughness: 0.6, metalness: 0.05 };
 const TEAL = new THREE.Color("#5eead4").multiplyScalar(2.2);
 const PINK = new THREE.Color("#f472b6").multiplyScalar(2);
@@ -32,7 +33,7 @@ function Arm({ side, armRef }) {
       </mesh>
       <mesh position={[0, -0.92, 0]}>
         <sphereGeometry args={[0.17, 24, 24]} />
-        <meshPhysicalMaterial {...shell} />
+        <meshStandardMaterial {...shell} />
       </mesh>
     </group>
   );
@@ -94,6 +95,7 @@ export default function Bot({ typing = false, follow = true, ...props }) {
           <meshStandardMaterial {...hoodie} color="#232a42" />
         </mesh>
         {/* chest light */}
+        <Glow position={[0, -1.4, 0.7]} size={0.7} opacity={0.45} />
         <mesh position={[0, -1.4, 0.63]} rotation={[-0.1, 0, 0]}>
           <ringGeometry args={[0.1, 0.15, 32]} />
           <meshBasicMaterial color={TEAL} toneMapped={false} />
@@ -109,15 +111,18 @@ export default function Bot({ typing = false, follow = true, ...props }) {
 
       <group ref={head} position={[0, 0, 0]}>
         <RoundedBox args={[1.7, 1.35, 1.35]} radius={0.42} smoothness={6}>
-          <meshPhysicalMaterial {...shell} />
+          <meshStandardMaterial {...shell} />
         </RoundedBox>
         {/* face screen */}
         <RoundedBox args={[1.36, 0.9, 0.2]} radius={0.12} smoothness={6} position={[0, 0.02, 0.6]}>
-          <meshPhysicalMaterial {...visor} />
+          <meshStandardMaterial {...visor} />
         </RoundedBox>
         <group ref={pupils}>
           <Eye x={-0.3} eyeRef={eyes[0]} />
           <Eye x={0.3} eyeRef={eyes[1]} />
+          <Glow position={[-0.3, 0.08, 0.76]} size={0.75} opacity={0.55} />
+          <Glow position={[0.3, 0.08, 0.76]} size={0.75} opacity={0.55} />
+          <Glow position={[0, -0.22, 0.76]} size={0.45} opacity={0.35} />
           {/* smile */}
           <mesh position={[0, -0.2, 0.71]} rotation={[0, 0, Math.PI]}>
             <torusGeometry args={[0.12, 0.025, 8, 24, Math.PI]} />
@@ -146,6 +151,7 @@ export default function Bot({ typing = false, follow = true, ...props }) {
           <cylinderGeometry args={[0.025, 0.025, 0.4, 8]} />
           <meshStandardMaterial color="#9aa3b8" metalness={0.8} roughness={0.3} />
         </mesh>
+        <Glow color="#f472b6" position={[0.41, 1.07, 0.05]} size={0.5} opacity={0.7} />
         <mesh ref={bulb} position={[0.41, 1.07, 0]}>
           <sphereGeometry args={[0.08, 16, 16]} />
           <meshBasicMaterial color={PINK} toneMapped={false} />

@@ -76,7 +76,7 @@ function Balls() {
   return sim.map((b, i) => (
     <mesh key={i} ref={(el) => (meshes.current[i] = el)} position={b.pos}>
       <sphereGeometry args={[R, 32, 32]} />
-      <meshPhysicalMaterial color="#f1f0f7" roughness={0.18} clearcoat={1} clearcoatRoughness={0.1} />
+      <meshStandardMaterial color="#f1f0f7" roughness={0.15} metalness={0.05} />
       <Decal position={[0, 0, R]} rotation={[0, 0, 0]} scale={0.75}>
         <meshStandardMaterial map={tex[i]} transparent polygonOffset polygonOffsetFactor={-10} roughness={0.3} toneMapped={false} />
       </Decal>

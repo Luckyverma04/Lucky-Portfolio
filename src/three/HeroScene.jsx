@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Float, Lightformer, Sparkles } from "@react-three/drei";
 import Quality from "./Quality";
+import Glow from "./Glow";
 import { markHeroReady } from "../lib/ready";
 import * as THREE from "three";
 import Bot from "./Bot";
@@ -22,9 +23,15 @@ function Halo() {
         <torusGeometry args={[2.8, 0.008, 8, 160]} />
         <meshBasicMaterial color={[2.4, 0.8, 1.6]} transparent opacity={0.55} toneMapped={false} />
       </mesh>
+      {/* soft light behind the robot and a wide faint tube around each ring: looks like bloom, costs almost nothing */}
+      <Glow size={6.5} opacity={0.22} />
       <mesh>
-        <circleGeometry args={[2.2, 64]} />
-        <meshBasicMaterial color="#5eead4" transparent opacity={0.05} />
+        <torusGeometry args={[2.3, 0.09, 8, 120]} />
+        <meshBasicMaterial color="#5eead4" transparent opacity={0.12} depthWrite={false} blending={THREE.AdditiveBlending} />
+      </mesh>
+      <mesh rotation={[0.3, 0.2, 0]}>
+        <torusGeometry args={[2.8, 0.06, 8, 120]} />
+        <meshBasicMaterial color="#f472b6" transparent opacity={0.1} depthWrite={false} blending={THREE.AdditiveBlending} />
       </mesh>
     </group>
   );
@@ -53,7 +60,6 @@ export default function HeroScene({ mobile }) {
       <color attach="background" args={["#090c14"]} />
       <ambientLight intensity={0.3} />
       <directionalLight position={[3, 4, 5]} intensity={1.6} />
-      <spotLight position={[0, 5, -3]} angle={0.6} penumbra={1} intensity={60} color="#a78bfa" />
       <pointLight position={[-4, 1, 2]} intensity={30} color="#5eead4" />
       <pointLight position={[4, -1, 2]} intensity={30} color="#f472b6" />
       <Environment resolution={128}>
@@ -70,7 +76,7 @@ export default function HeroScene({ mobile }) {
       </group>
       <Sparkles count={45} scale={[10, 6, 4]} size={2.2} speed={0.35} color="#99f6e4" opacity={0.7} />
       <Rig />
-      <Quality intensity={1.1} />
+      <Quality />
       <ReadySignal />
     </>
   );
