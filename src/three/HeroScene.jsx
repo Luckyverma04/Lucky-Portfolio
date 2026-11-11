@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Float, Lightformer, Sparkles } from "@react-three/drei";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import Quality from "./Quality";
+import { markHeroReady } from "../lib/ready";
 import * as THREE from "three";
 import Bot from "./Bot";
 
@@ -27,6 +28,13 @@ function Halo() {
       </mesh>
     </group>
   );
+}
+
+// tells the loader the robot is on screen (after a couple of drawn frames)
+function ReadySignal() {
+  const frames = useRef(0);
+  useFrame(() => { if (++frames.current === 3) markHeroReady(); });
+  return null;
 }
 
 function Rig() {
@@ -58,13 +66,12 @@ export default function HeroScene({ mobile }) {
           <Bot position={[0, 0.7, 0]} />
         </Float>
         <Halo />
-        <ContactShadows position={[0, -2.6, 0]} opacity={0.55} scale={8} blur={2.6} far={4} color="#000" />
+        <ContactShadows frames={1} position={[0, -2.6, 0]} opacity={0.55} scale={8} blur={2.6} far={4} color="#000" />
       </group>
       <Sparkles count={45} scale={[10, 6, 4]} size={2.2} speed={0.35} color="#99f6e4" opacity={0.7} />
       <Rig />
-      <EffectComposer multisampling={2}>
-        <Bloom mipmapBlur levels={5} luminanceThreshold={1} intensity={1.1} radius={0.7} />
-      </EffectComposer>
+      <Quality intensity={1.1} />
+      <ReadySignal />
     </>
   );
 }

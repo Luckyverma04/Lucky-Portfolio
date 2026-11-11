@@ -1,7 +1,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows, Environment, Float, Lightformer, RoundedBox } from "@react-three/drei";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import Quality from "./Quality";
 import * as THREE from "three";
 import Bot from "./Bot";
 
@@ -120,12 +120,10 @@ export default function DeskScene() {
         <Panel seed={0} position={[-1.9, 1.3, -1.4]} rotation={[0, 0.5, 0]} />
         <Panel seed={3} position={[1.9, 1.6, -1.2]} rotation={[0, -0.4, 0]} scale={0.8} />
 
-        <ContactShadows position={[0, -2.56, 0]} opacity={0.6} scale={8} blur={2.4} far={4} />
+        <ContactShadows frames={1} position={[0, -2.56, 0]} opacity={0.6} scale={8} blur={2.4} far={4} />
       </group>
       <Rig />
-      <EffectComposer multisampling={2}>
-        <Bloom mipmapBlur levels={5} luminanceThreshold={1} intensity={0.9} radius={0.6} />
-      </EffectComposer>
+      <Quality intensity={0.9} />
     </>
   );
 }
