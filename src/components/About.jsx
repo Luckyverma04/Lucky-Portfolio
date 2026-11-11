@@ -75,8 +75,11 @@ export default function About() {
             <p className="eyebrow">About me</p>
             <h2 id="about-title" className="h-display mt-3 text-5xl md:text-6xl">Who<br /><span className="grad-text">am I?</span></h2>
             {hasPhoto && (
-              <img src={profile.photo} alt={`Portrait of ${profile.name}`} onError={() => setHasPhoto(false)}
-                className="frame mt-8 aspect-[4/5] w-full max-w-[260px] rounded-2xl object-cover" loading="lazy" />
+              <div className="mt-8 w-full max-w-[220px] rounded-[22px] p-[3px] shadow-[0_20px_60px_-20px_rgb(var(--brand)/.6)] lg:max-w-[260px]"
+                style={{ background: "linear-gradient(135deg, rgb(var(--brand)), rgb(var(--violet)), rgb(var(--pink)))" }}>
+                <img src={profile.photo} alt={`Portrait of ${profile.name}`} onError={() => setHasPhoto(false)}
+                  className="aspect-[4/5] w-full rounded-[19px] object-cover object-top" loading="lazy" />
+              </div>
             )}
           </Reveal>
         </div>
