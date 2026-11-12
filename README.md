@@ -1,6 +1,49 @@
-# Lucky Verma — 3D Portfolio
+<div align="center">
 
-Single-page portfolio built with React 18, Vite, Tailwind CSS and Three.js (React Three Fiber).
+<img src="docs/banner.png" alt="Lucky Verma – 3D Portfolio" width="100%" />
+
+# 🤖 Lucky Verma — 3D Portfolio
+
+**Backend & MERN developer portfolio** with an interactive 3D robot, 3D scenes and project galleries.
+
+[🌐 Live site](https://lucky-portfolio-tau.vercel.app) · [💼 LinkedIn](https://www.linkedin.com/in/lucky-verma-886547307/) · [🐙 GitHub](https://github.com/Luckyverma04)
+
+![React](https://img.shields.io/badge/React_18-20232A?logo=react&logoColor=61DAFB)
+![Three.js](https://img.shields.io/badge/Three.js-000000?logo=threedotjs&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+
+</div>
+
+---
+
+## 📸 Screenshots
+
+| Home | What I do |
+|---|---|
+| ![Home](docs/screenshots/home.png) | ![What I do](docs/screenshots/what-i-do.png) |
+
+| Projects | Career & experience |
+|---|---|
+| ![Projects](docs/screenshots/projects.png) | ![Experience](docs/screenshots/experience.png) |
+
+| About | Contact |
+|---|---|
+| ![About](docs/screenshots/about.png) | ![Contact](docs/screenshots/contact.png) |
+
+## ✨ Highlights
+
+- Animated 3D robot hero and desk scene built from basic shapes in code (React Three Fiber), no downloaded models
+- Sections: Hero, What I do, Projects with screenshot slideshows, Career (Trazoo), Tech stack, About, Contact
+- Contact form through EmailJS, with a fallback when keys are missing
+- All text lives in one file (`src/data/content.js`); screenshots are picked up from folders automatically
+
+## 🛠️ Tech stack
+
+React 18 · Vite · Tailwind CSS · Three.js · React Three Fiber · Drei · React Router · EmailJS
+
+---
+
 Live: https://lucky-portfolio-tau.vercel.app
 
 ## Run locally
@@ -54,3 +97,23 @@ Copy `.env.example` to `.env` and fill in the three `VITE_APP_EMAILJS_*` values.
 ## Credits
 
 3D scenes are built from basic shapes in code; no downloaded models.
+
+---
+
+## 🖼️ Image links
+
+| Image | Link |
+|---|---|
+| Banner | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/banner.png |
+| Home – 3D robot hero | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/screenshots/home.png |
+| What I do | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/screenshots/what-i-do.png |
+| Projects | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/screenshots/projects.png |
+| Career & experience | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/screenshots/experience.png |
+| About | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/screenshots/about.png |
+| Contact | https://raw.githubusercontent.com/Luckyverma04/Lucky-Portfolio/main/docs/screenshots/contact.png |
+
+<div align="center">
+
+Made with ⚡ by **[Lucky Verma](https://github.com/Luckyverma04)**
+
+</div>
